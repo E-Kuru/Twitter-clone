@@ -1,8 +1,9 @@
 const express = require("express")
 const app = express()
 const User = require("../models/User")
+const { verifyUser } = require("../middleware/CheckUser")
 
-app.get('/', async (req,res) => {
+app.get('/', verifyUser, async (req,res) => {
     
     try{
         const user = await User.find().exec()
@@ -14,7 +15,7 @@ app.get('/', async (req,res) => {
     }
 })
 
-app.get('/:id', async (req,res) => {
+app.get('/:id', verifyUser, async (req,res) => {
     
     const {id} = req.params
 
