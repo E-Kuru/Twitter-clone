@@ -9,9 +9,9 @@ const ComentSchema = Schema({
     user: {
             type: Schema.Types.ObjectId, ref: "User"
     },
-    tweets: [{ 
+    tweets: { 
         type: Schema.Types.ObjectId, ref: "Tweet" 
-    }],
+    },
    
 }, {
     timestamps: true
