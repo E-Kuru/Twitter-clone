@@ -6,6 +6,7 @@ const { dbConnect } = require("./config/db")
 
 const users = require('./routes/users')
 const coment = require('./routes/coments')
+const tweet = require('./routes/tweets')
 
 dbConnect()
 
