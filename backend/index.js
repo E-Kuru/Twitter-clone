@@ -5,6 +5,7 @@ const port = 5000
 const { dbConnect } = require("./config/db")
 const users = require('./routes/users')
 const coment = require('./routes/coments')
+const tweet = require('./routes/tweets')
 
 dbConnect()
 
@@ -16,7 +17,7 @@ app.use(express.json())
 
 app.use('/tweet', tweet)
 app.use('/users', users)
-app.use('coments', coment)
+app.use('/coments', coment)
 
 
 app.listen(port, () => {
