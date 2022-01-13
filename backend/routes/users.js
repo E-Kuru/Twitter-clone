@@ -16,6 +16,18 @@ app.get('/', async (req,res) => {
     }
 })
 
+app.get('/:id', async (req,res) => {
+    
+    const {id} = req.params
+
+    try {
+        const oneUser =  await User.findById(id).exec()
+        res.json(oneUser)
+    } catch {
+        res.status(500).json({ error: err })
+    }
+})
+
 app.post('/newUser', async (req,res) => {
 
     const user = new User ({
