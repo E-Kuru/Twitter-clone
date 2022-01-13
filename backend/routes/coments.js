@@ -25,7 +25,7 @@ app.get('/:id', async (req, res) => {
 
 app.post('/', async (req, res) => {
     const coment = new Coment({
-        ...this.render.body
+        ...req.body
     })
     coment.save((err, coment) => {
         if(err) {
