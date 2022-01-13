@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
         type : Date
     },
     teweets : [{
-        type: mongoose.Schema.Types.ArrObjectId, ref: "Tweet"
+        type: mongoose.Schema.Types.ObjectId, ref: "Tweet"
     }],
     fallowers : {
         type: mongoose.Schema.Types.ObjectId, ref: "User"
