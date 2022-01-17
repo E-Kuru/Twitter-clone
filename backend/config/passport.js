@@ -4,24 +4,24 @@ const User = require("../models/User")
 
 const LocalStrategy = passportLocal.Strategy
 
-passport.use(new LocalStrategy({ passwordField: 'email' }, (username, password, done) => {
+passport.use(new LocalStrategy({ usernameField : "name", passwordField: "email" }, async (username, password, done) => {
 
-    const user = User.findOne({name : username, email : password}).exec()
-    
+    const user = await User.findOne({name : username, email : password})
+
     if (!user) {
-    return done(null, false)
+        return done(null, false)
     } 
     return done(null, user)
 }))
 
 passport.serializeUser((user, done) => {
-    done(null, user._id)
+    done(null, user)
 })
 
 passport.deserializeUser((id, done) => {
   
-    const user = User.findById(id).exec()
-    
+    const user = User.findById(id)
+
     console.log('User Passport',user);
 
     done(null, user)
