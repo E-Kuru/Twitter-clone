@@ -16,7 +16,7 @@ import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 
 const Home = () => {
 
-    const {User, setUser} = useContext(UsersConnectContext)
+    const {user, setUser} = useContext(UsersConnectContext)
 
     const [Tweet, setTweet] = useState("")
 
@@ -34,7 +34,7 @@ const Home = () => {
 
     return (
         <>
-        {!User ? 
+        {user ? 
             <div className="container">
                 <div className="left">
                     <div className='element-container'>
