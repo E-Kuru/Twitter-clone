@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const passport = require('../config/passport')
+const User = require('../models/User')
 
 app.post(`/login`, passport.authenticate('local'), (req, res) => {
   
