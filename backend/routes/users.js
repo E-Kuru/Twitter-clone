@@ -15,7 +15,7 @@ app.get('/', verifyUser, async (req,res) => {
     }
 })
 
-app.get('/:id', verifyUser, async (req,res) => {
+app.get('/:id', async (req,res) => {
     
     const {id} = req.params
 
