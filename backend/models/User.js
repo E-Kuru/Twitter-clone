@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
     dateOfBirth : {
         type : Date
     },
-    teweets : [{
+    tweets : [{
         type: mongoose.Schema.Types.ObjectId, ref: "Tweet"
     }],
     fallowers : {

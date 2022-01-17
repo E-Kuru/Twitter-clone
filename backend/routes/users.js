@@ -29,17 +29,19 @@ app.get('/:id', verifyUser, async (req,res) => {
 
 app.post('/newUser', async (req,res) => {
 
-    const user = new User ({
-        ...req.body
-    })
+    try {
 
-    user.save((err, user) => {
-        if (err) {
-            res.status(500).json({ error: err })
-            return
-        }
-        res.json(user)
-    })
+        const user = new User ({
+            ...req.body
+        })
+
+        const newUser = await user.save()
+
+        res.json(newUser)
+         
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
 })
 
 module.exports = app
