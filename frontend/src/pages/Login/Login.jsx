@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import Form from "../../components/Form";
+// import Form from "../../components/Form";
+import Signup from '../../components/Signup';
+import LoginComponent from '../../components/LoginComponent';
 import "./login.css"
 
 const Login = () => {
@@ -29,7 +31,9 @@ const Login = () => {
                 <h3>Vous avez déjà un compte ?</h3>
                 <p><a href="#" onClick={onLoginClick}>Se connecter</a></p>
             </div>
-            {formType != "close" && <Form className="form" formType = {formType} setFormType={setFormType}/>}
+            {formType === "signup" && <Signup setFormType= {setFormType}/>}
+            {formType === "login" && <LoginComponent setFormType= {setFormType}/>}
+
             
         </div>
     )
