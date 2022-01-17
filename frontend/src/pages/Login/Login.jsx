@@ -1,7 +1,7 @@
 import "./login.css"
 import { useState } from 'react';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import Signup from '../../components/Signup';
+import SignupComponent from '../../components/SignupComponent';
 import LoginComponent from '../../components/LoginComponent';
 
 const Login = () => {
@@ -33,7 +33,7 @@ const Login = () => {
                 <h3>Vous avez déjà un compte ?</h3>
                 <p><a href="#" onClick={onLoginClick}>Se connecter</a></p>
             </div>
-            {formType === "signup" && <Signup setFormType= {setFormType}/>}
+            {formType === "signup" && <SignupComponent setFormType= {setFormType}/>}
             {formType === "login" && <LoginComponent setFormType= {setFormType}/>}
 
             

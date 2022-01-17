@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext} from "react"
-
+import { useState, useEffect,useContext} from "react"
+import { Link } from "react-router-dom";
 import {UsersConnectContext} from "../../contexts/usersConnect"
 
 import "./home.css"
@@ -19,17 +19,61 @@ const Home = () => {
     const {user, setUser} = useContext(UsersConnectContext)
 
     const [Tweet, setTweet] = useState("")
-
-    useEffect(() => {
-        setUser(true)
-    }, [])
+    const [LoggedTweets, setLoggedTweets] = useState(null)
+    const [AllTweets, setAllTweets] = useState(null)
 
     const handleSubmit = e => {
         e.preventDefault()
+
+        const newTweet = {
+            content : Tweet,
+            user_id : user._id
+        }
+
+        postTweet(newTweet)
+        setTweet("")
+    }
+
+    useEffect(async () => {
+
+        if(user){
+            console.log(user._id);
+            const getLoggedPost = await fetch (`http://localhost:5000/tweet/user/${user._id}`, {
+                credentials: 'include',
+            })
+    
+            const res = await getLoggedPost.json()
+            setLoggedTweets(res)
+        }
+        else{
+            const getPost = await fetch (`http://localhost:5000/tweet`, {
+                credentials: 'include',
+            })
+    
+            const res = await getPost.json()
+            setAllTweets(res)
+        }
+    },[user])
+    
+    const postTweet = async (values) => {
+
+        const response = await fetch ('http://localhost:5000/tweet', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(values)
+        })
+        const res = await response.json()
     }
 
     const handleTweetChange = e => {
         setTweet(e.target.value)
+    }
+
+    if(!AllTweets || LoggedTweets){
+        return <h1>Loading</h1>
     }
 
     return (
@@ -89,13 +133,68 @@ const Home = () => {
                                 <button type="submit">tweet</button>
                             </div>
                         </form>
+                        {LoggedTweets.map(e => (
+                            <div>
+                                <p>{e.content}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div className="right">right</div>
             </div> 
         : 
-            <div>
-                <h1>Hello</h1>
+            <div className="container">
+                <div className="left">
+                    <div className='element-container'>
+                        <div><Link to='/'><TwitterIcon className = "first logo"/></Link></div>
+                        <div className= "element">
+                            <HomeIcon className= "logo"/>
+                            <p>Home</p>
+                        </div>
+                        <div className= "element">
+                            <p className='logo'>#</p>
+                            <p>Explore</p>
+                        </div>
+                        <div className= "element">
+                            <NotificationsNoneOutlinedIcon className= "logo"/>
+                            <p>Notification</p>
+                        </div>
+                        <div className= "element">
+                            <EmailOutlinedIcon className= "logo"/>
+                            <p>Messages</p>
+                        </div>
+                        <div className= "element">
+                            <BookmarkBorderOutlinedIcon className= "logo"/>
+                            <p>Bookmarks</p>
+                        </div>
+                        <div className= "element">
+                            <ListAltOutlinedIcon className= "logo"/>
+                            <p>Lists</p>
+                        </div>
+                        <div className= "element">
+                            <PermIdentityOutlinedIcon className= "logo"/>
+                            <p>Profile</p>
+                        </div>
+                        <div className= "last element">
+                            <MoreHorizOutlinedIcon className= "logo"/>
+                            <p>More</p>
+                        </div>
+                        <button>Tweet</button>
+                    </div>
+                </div>
+                <div className="center">
+                    <div className='header'>
+                        <p>Home</p>
+                    </div>
+                    <div className="unloggedTweets">
+                        {AllTweets.map(e => (
+                            <div>
+                                <p>{e.content}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="right">right</div>
             </div> 
         } 
             
