@@ -61,7 +61,13 @@ const Form = ({formType, setFormType}) => {
     const formik = useFormik({
         initialValues: {
             name: "karimou",
-            password: "bestt7501"
+            password: "bestt7501",
+            email: "kkfec@gmail.com",
+            tel: "0751296845",
+            date: ""
+        },
+        onSubmit: values => {
+            console.log(values);
         }
     })
     const onDateChange = (e) => {
@@ -73,20 +79,24 @@ const Form = ({formType, setFormType}) => {
     return (
         <>
             <Shadow className="shadow"></Shadow>
-            <FormField className={formType === "login" ? "form-login" : "form-signup"}>
+            <FormField 
+                className={formType === "login" ? "form-login" : "form-signup"}
+                onSubmit={formik.handleSubmit}
+            >
                 <CloseOutlinedIcon className="close-icon" onClick= {onCloseClick}/>
                 <TwitterIcon className="form-icon"/>
                 <h1>Créer votre compte</h1>
-                {formType === "signup" && <Input type="text" placeholder="Name"/>}
-                <Input type="text" placeholder="email"/>
-                <Input type="password" placeholder="password"/>
+                {formType === "signup" && <Input type="text" placeholder="Name" name= "name" value= {formik.values.name}/>}
+                <Input type="text" placeholder="email" name="email" value= {formik.values.email}/>
+                <Input type="password" placeholder="password" name= "password" value= {formik.values.password}/>
                 
                 {formType === "signup" && 
                     <>
                         <Input 
-                        type="tel" 
-                        pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$"
-                        placeholder="telephone"
+                            type="text"
+                            placeholder="telephone"
+                            name= "tel"
+                            value= {formik.values.tel}
                         />
                         <Input 
                             type="date" 
@@ -94,6 +104,8 @@ const Form = ({formType, setFormType}) => {
                             min="1900-01-01"
                             max="2022-01-17"
                             onChange={onDateChange}
+                            name= "date"
+                            value= {formik.values.tel}
                         />
                     </>
                 }
