@@ -10,8 +10,8 @@ const App = () => {
     <UserConnectProvider>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/login" element={<Login/>}/>
+          <Route exact path="/home" element={<Home/>}/>
+          <Route exact path="/" element={<Login/>}/>
           <Route exact path="/tweet/:id" element={<SingleTweet/>}/>
           <Route exact path="*" element={<NotFound/>}/>
         </Routes>

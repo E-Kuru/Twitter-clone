@@ -2,8 +2,11 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import styled from 'styled-components'
 import { useFormik } from 'formik'
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import * as Yup from 'yup'
+import {UsersConnectContext} from "../contexts/usersConnect"
+
 
 const Shadow = styled.div`
     position: absolute;
@@ -56,7 +59,11 @@ const FormButton = styled.button`
     border: none;
 `
 const Signup = ({setFormType}) => {
+
+    const {user, setUser} = useContext(UsersConnectContext)
+
     const navigate = useNavigate();
+
 
     const formik = useFormik({
         initialValues: {
@@ -64,7 +71,7 @@ const Signup = ({setFormType}) => {
             password: "bestt7501",
             email: "kkfec@gmail.com",
             tel: "0751296845",
-            date:""            
+            dateOfBirth:"10/10/2000"            
         },
         onSubmit: values => {
             signup(values)
@@ -72,18 +79,19 @@ const Signup = ({setFormType}) => {
         validateOnChange: false,
         validationSchema: Yup.object({
             name: Yup.string()
-                .required("Username is required"),
+            .required("Username is required"),
             password: Yup.string()
-                .required("Password is required"),
+            .required("Password is required"),
             email: Yup.string()
-                .required("Password is required"),
+            .required("Password is required"),
             tel: Yup.string()
-                .required("Password is required"),
-            date: Yup.string()
-                .required("Password is required"),
+            .required("Password is required"),
+            dateOfBirth: Yup.string()
+            .required("Password is required"),
             
         })
     })
+
     const signup = async values => {
         const response = await fetch ('http://localhost:5000/auth/signup', {
             method: 'post',
@@ -94,14 +102,17 @@ const Signup = ({setFormType}) => {
             body: JSON.stringify(values)
         })
         if(response.status >= 400) {
-            alert(response.statusText)
+            alert("Error, this mail already exist")
         } else {
-            navigate('/')
+            const userLogged = await response.json()
+            setUser(userLogged)
+            navigate('/home')
         }
     }
-const onCloseClick = () => {
-    setFormType("close")
-}
+    const onCloseClick = () => {
+        setFormType("close")
+    }
+
 return (
     <>
         <Shadow className="shadow"></Shadow>
@@ -154,8 +165,8 @@ return (
                 type="date" 
                 min="1900-01-01"
                 max="2022-01-17"
-                name= "date"
-                value= {formik.values.date}
+                name= "dateOfBirth"
+                value= {formik.values.dateOfBirth}
                 onChange={formik.handleChange}
             />
             

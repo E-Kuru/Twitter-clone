@@ -1,18 +1,20 @@
+import "./login.css"
 import { useState } from 'react';
 import TwitterIcon from '@mui/icons-material/Twitter';
-// import Form from "../../components/Form";
 import Signup from '../../components/Signup';
 import LoginComponent from '../../components/LoginComponent';
-import "./login.css"
 
 const Login = () => {
+
     const [formType, setFormType] = useState("close")
+
     const onSigninClick = () => {
         setFormType("signup")
     }
     const onLoginClick = () => {
         setFormType("login")
     }
+
     return (
         <div className="container-login">
             <div className="background"> 

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useContext } from 'react';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import styled from 'styled-components'
 import { useFormik } from 'formik'
+import { useNavigate } from 'react-router';
 import * as Yup from 'yup'
+import {UsersConnectContext} from "../contexts/usersConnect"
 
 const Shadow = styled.div`
     position: absolute;
@@ -56,14 +58,36 @@ const FormButton = styled.button`
     border: none;
 `
 const LoginComponent = ({setFormType}) => {
+
+    const {user, setUser} = useContext(UsersConnectContext)
+
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
-            password: "bestt7501",
             email: "kkfec@gmail.com",
+            password: "bestt7501",
         },
-        onSubmit: values => {
-            console.log(values);
+
+        onSubmit: async values => {
+            const response = await fetch ('http://localhost:5000/auth/login', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(values)
+        })
+
+            if(response.status >= 400) {
+                alert("Error, this mail already exist")
+            } else {
+                const userLogged = await response.json()
+                setUser(userLogged)
+                navigate('/home')
+            }
         },
+
         validateOnChange: false,
         validationSchema: Yup.object({
             
@@ -87,12 +111,12 @@ return (
                 className="close-icon" 
                 onClick= {onCloseClick} 
                 style= {{  
-                            position: "absolute",
-                            top: "10px",
-                            left: "10px",
-                            fontSize: "25px",
-                            cursor: "pointer",
-                            color: "black" 
+                    position: "absolute",
+                    top: "10px",
+                    left: "10px",
+                    fontSize: "25px",
+                    cursor: "pointer",
+                    color: "black" 
                 }}
             />
             <TwitterIcon className="form-icon" style= {{color: "rgb(29, 155, 240)", fontSize: "40px"}}/>
