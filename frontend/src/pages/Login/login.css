@@ -32,7 +32,7 @@
     font-size: 2em;
     margin-bottom: 20px;
 }
-.entryFild .sigin-btn {
+.entryFild .signup-btn {
     background-color: rgb(29, 155, 240);
     padding: 10px 10px;
     color: #ffff;
@@ -53,7 +53,3 @@
     font-size: 18px;
 }
 
-.form {
-    position: absolute;
-    top: -50%;
-}
