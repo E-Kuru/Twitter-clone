@@ -13,25 +13,20 @@ app.post(`/login`, passport.authenticate('local'), (req, res) => {
   }
 })
 
-app.post('/signup', (req,res) => {
+app.post('/signup', async (req,res) => {
 
-    const newUser = new User ({
+    try {
+
+      const newUser = new User ({
         ...req.body
     })
-    
-    newUser.save((err, user) => {
-        if (err) {
-            res.status(500).json({ error: err })
-            return
-        }
 
-        if (user) {
-            req.logIn(user, (err) => {
-              if (err) throw err
-              res.status(200).json(user)
-            })
-        }
-    })
+    const signupUser = await newUser.save()
+    res.status(200).json(signupUser)
+
+    } catch (err) {
+      res.status(500).json({ error: err })
+    }
 })
 
 

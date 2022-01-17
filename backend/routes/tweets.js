@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const Tweet = require('../models/Tweet')
 const User = require('../models/User')
+const { verifyUser } = require("../middleware/CheckUser")
 
 app.get('/', async (req,res) => {
     
@@ -15,7 +16,7 @@ app.get('/', async (req,res) => {
     }
 })
 
-app.get('/:id', async (req,res) => {
+app.get('/:id', verifyUser, async (req,res) => {
     
     const {id} = req.params
     
@@ -29,7 +30,7 @@ app.get('/:id', async (req,res) => {
     }
 })
 
-app.get('/user/:id', async (req,res) => {
+app.get('/user/:id', verifyUser, async (req,res) => {
     
     const {id} = req.params
 
@@ -43,7 +44,7 @@ app.get('/user/:id', async (req,res) => {
     }
 })
 
-app.post('/', async (req, res) => {
+app.post('/', verifyUser, async (req, res) => {
 
     try {
 

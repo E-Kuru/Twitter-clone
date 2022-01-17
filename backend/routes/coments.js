@@ -1,40 +1,48 @@
 const express = require("express")
 const app = express()
 const Coment = require('../models/Coment')
+const { verifyUser } = require("../middleware/CheckUser")
 
-app.get('/', async (req, res) => {
+app.get('/', verifyUser, async (req, res) => {
+    
     try{
         const coments = await Coment.find.exec()
 
         res.json(coments)
 
-    }catch (err){
+    } catch (err){
         res.status(500).json({ error: err })
     }
 })
 
-app.get('/:id', async (req, res) => {
+app.get('/:id', verifyUser, async (req, res) => {
+
     const {id} = req.params
+
     try{
+
         const coment = await Coment.findById(id).exec()
         res.json(coment)
-    }catch (err) {
+        
+    } catch (err) {
         res.status(500).json({ error: err })
     }
 })
 
-app.post('/', async (req, res) => {
-    const coment = new Coment({
-        ...req.body
-    })
-    coment.save((err, coment) => {
-        if(err) {   
-            res.status(500).json({ error: err })
-            return
-        }
+app.post('/',  verifyUser, async (req, res) => {
+    try {
+
+        const comentBody = new Coment({
+            ...req.body
+        })
+        const coment = await comentBody.save()
 
         res.json(coment)
-    })
+
+    } catch (err) {
+        res.status(500).json({ error: err })
+    
+    }
 })
 
 module.exports = app
