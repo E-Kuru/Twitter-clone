@@ -1,0 +1,31 @@
+form {
+    position: absolute;
+    width: 60%;
+    height: 75%;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+    padding-top: 20px;
+}
+
+input {
+    width: 60%;
+    height: 35px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+.form-btn {
+    background-color:rgb(29, 155, 240);
+    padding: 8px 30px;
+    color: #ffff;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 20px;
+}

@@ -3,6 +3,7 @@
     height: 100vh;
     background: #ffff;
     color: black;
+    position: relative;
 }
 .background{
     flex: 1;
@@ -19,7 +20,7 @@
 }
 .entryFild .logo {
     font-size: 45px;
-    color:rgb(29, 155, 240);;
+    color:rgb(29, 155, 240);
     margin-bottom: 70px;
 }
 .entryFild h1 {
@@ -50,4 +51,9 @@
     color:rgb(29, 155, 240);
     font-weight: bold;
     font-size: 18px;
+}
+
+.form {
+    position: absolute;
+    top: -50%;
 }

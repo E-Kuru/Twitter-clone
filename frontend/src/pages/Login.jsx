@@ -1,5 +1,6 @@
 import "./login.css"
 import TwitterIcon from '@mui/icons-material/Twitter';
+import Form from "../components/Form";
 
 const Login = () => {
     return (
@@ -15,6 +16,7 @@ const Login = () => {
                 <h3>Vous avez déjà un compte ?</h3>
                 <p><a href="#">Se connecter</a></p>
             </div>
+            <Form className= "form"/>
         </div>
     )
 }
