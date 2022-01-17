@@ -5,8 +5,9 @@ const TweetSchema = Schema({
         type: String,
         required: true
     },
-    users: {
-            type: Schema.Types.ObjectId, ref: "User"
+    user_id: {
+        type: Schema.Types.ObjectId, ref: "User",
+        required : true
     },
     coments: [{ 
         type: Schema.Types.ObjectId, ref: "Coment" 
