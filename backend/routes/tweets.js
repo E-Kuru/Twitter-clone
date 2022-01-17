@@ -5,7 +5,6 @@ const User = require('../models/User')
 
 app.get('/', async (req,res) => {
     
-    console.log("Tous les tweets");
     try{
         const tweets = await Tweet.find().exec()
         
@@ -17,8 +16,6 @@ app.get('/', async (req,res) => {
 })
 
 app.get('/:id', async (req,res) => {
-    
-    console.log("Un seul tweet");
     
     const {id} = req.params
     
@@ -33,8 +30,6 @@ app.get('/:id', async (req,res) => {
 })
 
 app.get('/user/:id', async (req,res) => {
-    
-    console.log("User id + tweets");
     
     const {id} = req.params
 
