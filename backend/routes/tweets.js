@@ -3,7 +3,6 @@ const app = express()
 const Tweet = require('../models/Tweet')
 const User = require('../models/User')
 const { verifyUser } = require("../middleware/CheckUser")
-const { find } = require("../models/Tweet")
 
 app.get('/', async (req,res) => {
     
@@ -64,20 +63,27 @@ app.post('/', verifyUser, async (req, res) => {
 
 })
 
-app.delete('/:id', async (req,res) => {
+app.delete('/:id',verifyUser, async (req,res) => {
 
     const {id} = req.params
 
     try{
-        const findTweet = await Tweet.findById(id)
-        const deleteTweet = await Tweet.deleteOne(findTweet)
-        await deleteTweet.save()
+        const findTweet = await Tweet.findById(id).lean().exec()
+        console.log("User id", findTweet.user_id.valueOf());
+        
+        const findUser = await User.findOne({_id : findTweet.user_id.valueOf()}).exec()
+        console.log("FindUser", findUser);
 
-        const findUser = await User.findById(findTweet.user_id).exec()
-        const newUerTweets = await findUser.tweets.deleteOne(id)
-        await newUerTweets.save()
+        const tweetUpdated = findUser.tweets.filter(e => e != id)
+        findUser.tweets = tweetUpdated
+        findUser.save()
+
+        const deleteTweet = await Tweet.deleteOne({_id : id})
+
+        res.json({succes : "This tweet successfully been deleted"})
 
     } catch (err) {
+        console.log("Catch error", err);
         res.status(500).json({ error: err })
     }
 })

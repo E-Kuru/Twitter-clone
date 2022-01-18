@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const Coment = require('../models/Coment')
+const Tweet = require("../models/Tweet")
 const { verifyUser } = require("../middleware/CheckUser")
 
 app.get('/', verifyUser, async (req, res) => {
@@ -30,18 +31,43 @@ app.get('/:id', verifyUser, async (req, res) => {
 })
 
 app.post('/',  verifyUser, async (req, res) => {
-    try {
 
-        const comentBody = new Coment({
+    try {
+        const coment = new Coment({
             ...req.body
         })
-        const coment = await comentBody.save()
+        const OneComent = await coment.save()
 
-        res.json(coment)
+        const findTweet = await Tweet.findById(req.body.user_id).exec()
+        findTweet.coments = [...findTweet.coments, OneComent._id]
+        await findTweet.save()
+
+        res.json(OneComent)
+        
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+})
+
+app.delete('/:id',verifyUser, async (req,res) => {
+
+    const {id} = req.params
+
+    try{
+        const findComent = await Coment.findById(id).lean().exec()
+        
+        const findTweet = await Tweet.findOne({_id : findComent.tweet_id.valueOf()}).exec()
+
+        const comentsUpdate = findTweet.coments.filter(e => e != id)
+        findTweet.coments = comentsUpdate
+        findTweet.save()
+
+        const deleteTweet = await Coment.deleteOne({_id : id})
+
+        res.json({succes : "This coment successfully been deleted"})
 
     } catch (err) {
         res.status(500).json({ error: err })
-    
     }
 })
 
