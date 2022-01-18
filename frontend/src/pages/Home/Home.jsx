@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import {UsersConnectContext} from "../../contexts/usersConnect"
 import styled from 'styled-components'
 import "./home.css"
-import TwitterIcon from '@mui/icons-material/Twitter';
-
-import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import LeftComponent from "../../components/LeftComponent";
+import RightComponent from "../../components/RightComponent";
+
+import TwitterIcon from '@mui/icons-material/Twitter';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 
 const LoadingContainer = styled.div`
     position: absolute;
@@ -140,7 +141,8 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-                <div className="right">right</div>
+                {/* <div className="right">right</div> */}
+                <RightComponent/>
             </div> 
         : 
             <div className="container">
@@ -166,7 +168,8 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-                <div className="right">right</div>
+                {/* <div className="right">right</div> */}
+                <RightComponent/>
             </div> 
         } 
             

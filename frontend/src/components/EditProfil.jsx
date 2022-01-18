@@ -164,7 +164,6 @@ const EditProfil = ({setClose}) => {
                         onChange={formik.handleChange} 
                     />
                 </Form>
-                <div></div>
             </Container>
         </Shadow>
     )
