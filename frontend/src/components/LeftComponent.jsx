@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Badge from '@mui/material/Badge';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -59,15 +60,18 @@ const LeftComponent = () => {
     const onProfilClick = () => {
         navigate('/profil')
     }
+    
     return (
         <LeftContainer>
             <ElementContainer>
-                {/* <div> */}
+                <div>
+                    <Link to="/">
                     <TwitterIcon 
                         style={{fontSize: "34px",color: "#ffff", marginBottom: "2px"}}
                     />
-                {/* </div> */}
-                <Element className= "element" onClick={onHomeClick}>
+                    </Link>
+                </div>
+                <Element className= "element">
                     <HomeIcon 
                         className= "logo"
                         style={{fontSize: "30px"}}
