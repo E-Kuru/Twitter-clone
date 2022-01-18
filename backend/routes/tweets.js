@@ -34,8 +34,6 @@ app.get('/user/:id', verifyUser, async (req,res) => {
     
     const {id} = req.params
 
-    console.log(id);
-    
     try {
         const allTweets = await Tweet.find({user_id : id}).exec()
         res.json(allTweets)
