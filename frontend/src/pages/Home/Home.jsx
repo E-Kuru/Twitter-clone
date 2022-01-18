@@ -120,9 +120,18 @@ const Home = () => {
                             </div>
                         </form>
                         {LoggedTweets.map(e => (
-                            <div key={e._id + e.email}>
+                            <Link key={e._id + e.email} to={`/tweet/${e._id}`}>
+                            <div className="loggedTweets">
+                                <div className="content">
+                                <h3>{user.name}</h3>
                                 <p>{e.content}</p>
+                                </div>
+                                <div className="tweet-actions">
+                                    <div></div>
+                                    <div></div>
+                                </div>
                             </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -137,9 +146,17 @@ const Home = () => {
                     </div>
                     <div className="unloggedTweets">
                         {AllTweets.map(e => (
-                            <div>
-                                <p>{e.content}</p>
-                            </div>
+                            <Link key={e._id + e.email} to={`/tweet/${e._id}`}>
+                                <div className="loggedTweets">  
+                                    <div className="content">
+                                    <h3>{user.name}</h3>
+                                    <p>{e.content}</p>
+                                </div>
+                                <div className="tweet-actions">
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>                            </Link>
                         ))}
                     </div>
                 </div>
