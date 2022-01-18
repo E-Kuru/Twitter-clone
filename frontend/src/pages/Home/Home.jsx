@@ -149,14 +149,15 @@ const Home = () => {
                             <Link key={e._id + e.email} to={`/tweet/${e._id}`}>
                                 <div className="loggedTweets">  
                                     <div className="content">
-                                    <h3>{user.name}</h3>
-                                    <p>{e.content}</p>
+                                        <h3>{user.name}</h3>
+                                        <p>{e.content}</p>
+                                    </div>
+                                    <div className="tweet-actions">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
                                 </div>
-                                <div className="tweet-actions">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>                            </Link>
+                            </Link>
                         ))}
                     </div>
                 </div>

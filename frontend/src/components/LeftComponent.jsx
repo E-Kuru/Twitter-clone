@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import TwitterIcon from '@mui/icons-material/Twitter';
 import HomeIcon from '@mui/icons-material/Home';
@@ -55,13 +56,16 @@ const LeftComponent = () => {
     const onProfilClick = () => {
         navigate('/profil')
     }
+    
     return (
         <LeftContainer>
             <ElementContainer>
                 <div>
+                    <Link to="/">
                     <TwitterIcon 
                         style={{fontSize: "38px",color: "#1d9bf0", marginBottom: "2px"}}
                     />
+                    </Link>
                 </div>
                 <Element className= "element">
                     <HomeIcon 
