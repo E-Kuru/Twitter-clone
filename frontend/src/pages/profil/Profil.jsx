@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import LeftComponent from '../../components/LeftComponent'
-
+import { useNavigate } from 'react-router-dom';
+import EditProfil from '../../components/EditProfil';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
+import { useState } from 'react';
 
 const Container = styled.div`
     display: flex;
@@ -12,6 +14,8 @@ const Container = styled.div`
 `
 const Center = styled.div`
     flex: 2;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
 `
 const Header = styled.div`
     position: fixed;
@@ -28,7 +32,7 @@ const ProfilBackGround = styled.div`
     height: 200px;
     margin-top: 45px;
 `
-const EditProfil = styled.div`
+const EditUserProfil = styled.div`
     width: 100%;
     height: 200px;
     background-color: black;
@@ -72,48 +76,65 @@ const UserInformation = styled.div`
     padding-bottom: 8px;
 
 `
+const Paragraph = styled.p`
+    color: grey;
+`
 const Joined = styled.div`
     display: flex;
     margin-bottom: 8px;
     gap: 10px;
-    color: grey;
+    color: gray;
 `
 const Follow = styled.div`
     display: flex;
     gap: 10px;
-    color: grey;
+    color: gray;
 `
 const Right = styled.div`
     flex: 1;
     background : yellow;
 `
 const Profil = () => {
+    const [close, setClose] = useState("false")
+    const navigate = useNavigate()
+
+    const onArrowClick = () => {
+        navigate("/home")
+    }
+
+    const onEditClick = () => {
+        setClose("true")
+    }
     return (
         <Container>
+            {close === "true" && <EditProfil setClose= {setClose}/>}
             <LeftComponent/>
             <Center>
                 <Header>
-                    <ArrowBackOutlinedIcon style= {{ fontSize: "30px", cursor: "pointer"}}/>
+                    <ArrowBackOutlinedIcon 
+                        onClick= {onArrowClick}
+                        style= {{ fontSize: "30px", cursor: "pointer"}}
+                    />
                 </Header>
                 <ProfilBackGround></ProfilBackGround>
-                <EditProfil>
+                <EditUserProfil>
                     <Modification>
                         <UserNameBtn>K</UserNameBtn>
-                        <EditBtn>Edit Profil</EditBtn>
+                        <EditBtn onClick={onEditClick}>Edit Profil</EditBtn>
                     </Modification>
                     <UserInformation>
                         <h2>Karimou cisse</h2>
-                        <p style={{marginBottom: "10px", color: "grey"}}>@karimoucisse2</p>
+                        <Paragraph style={{marginBottom: "10px", color: "grey"}}>@karimoucisse2</Paragraph>
                         <Joined>
                             <DateRangeOutlinedIcon/>
-                            <p>joinded January 2022</p>
+                            <Paragraph>joinded January 2022</Paragraph>
                         </Joined>
                         <Follow>
-                            <p><strong>6</strong>Following</p>
-                            <p><strong>1</strong>Follower</p>
+                            <Paragraph><strong>6</strong>Following</Paragraph>
+                            <Paragraph><strong>1</strong>Follower</Paragraph>
                         </Follow>
                     </UserInformation>
-                </EditProfil>
+                </EditUserProfil>
             </Center>
             <Right/>
 

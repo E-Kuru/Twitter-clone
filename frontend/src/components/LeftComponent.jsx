@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 
+import Badge from '@mui/material/Badge';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import HomeIcon from '@mui/icons-material/Home';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
@@ -52,18 +53,21 @@ const Button = styled.button`
 const LeftComponent = () => {
     const navigate = useNavigate()
 
+    const onHomeClick = () => {
+        navigate("/home")
+    }
     const onProfilClick = () => {
         navigate('/profil')
     }
     return (
         <LeftContainer>
             <ElementContainer>
-                <div>
+                {/* <div> */}
                     <TwitterIcon 
-                        style={{fontSize: "38px",color: "#1d9bf0", marginBottom: "2px"}}
+                        style={{fontSize: "34px",color: "#ffff", marginBottom: "2px"}}
                     />
-                </div>
-                <Element className= "element">
+                {/* </div> */}
+                <Element className= "element" onClick={onHomeClick}>
                     <HomeIcon 
                         className= "logo"
                         style={{fontSize: "30px"}}
@@ -79,10 +83,12 @@ const LeftComponent = () => {
                     <p>Explore</p>
                 </Element>
                 <Element className= "element">
-                    <NotificationsNoneOutlinedIcon 
-                        className= "logo"
-                        style={{fontSize: "30px"}}
-                    />
+                    <Badge badgeContent={4} color="primary">
+                        <NotificationsNoneOutlinedIcon 
+                            className= "logo"
+                            style={{fontSize: "30px"}}
+                        />
+                    </Badge>
                     <p>Notification</p>
                 </Element>
                 <Element className= "element">

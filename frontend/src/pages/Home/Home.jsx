@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import {UsersConnectContext} from "../../contexts/usersConnect"
 import styled from 'styled-components'
 import "./home.css"
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import LeftComponent from "../../components/LeftComponent";
 
 const LoadingContainer = styled.div`
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
     top:0;
     bottom: 0;
     left: 0;
@@ -21,6 +22,8 @@ const LoadingContainer = styled.div`
     gap: 30px;
     align-items: center;
     justify-content: center;
+    background : black;
+    color: white;
 `
 const Loading = styled.div`
     width : 150px;
@@ -94,6 +97,8 @@ const Home = () => {
 
     if(user && !LoggedTweets|| !user && !AllTweets){
         return <LoadingContainer>
+                <TwitterIcon 
+                    style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
                 <Loading></Loading>
                 <h2>Please wait</h2>
             </LoadingContainer>
@@ -145,18 +150,19 @@ const Home = () => {
                         <p>Home</p>
                     </div>
                     <div className="unloggedTweets">
-                        {AllTweets.map(e => (
-                            <Link key={e._id + e.email} to={`/tweet/${e._id}`}>
+                        {AllTweets.map(element=> (
+                            <Link key={element._id + element.email} to={`/tweet/${element._id}`}>
                                 <div className="loggedTweets">  
                                     <div className="content">
-                                    <h3>{user.name}</h3>
-                                    <p>{e.content}</p>
+                                        <h3>{user.name}</h3>
+                                        <p>{element.content}</p>
+                                    </div>
+                                    <div className="tweet-actions">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
                                 </div>
-                                <div className="tweet-actions">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>                            </Link>
+                            </Link>
                         ))}
                     </div>
                 </div>
