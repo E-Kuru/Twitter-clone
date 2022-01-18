@@ -80,7 +80,7 @@ const Home = () => {
             <div className="container">
                 <div className="left">
                     <div className='element-container'>
-                        <div><TwitterIcon className= "first logo"/></div>
+                    <div><Link to='/'><TwitterIcon className="first logo"/></Link></div>
                         <div className= "element">
                             <HomeIcon className= "logo"/>
                             <p>Home</p>
