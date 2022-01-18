@@ -196,10 +196,16 @@ const Home = () => {
                     <div className="unloggedTweets">
                         {AllTweets.map(e => (
                             <Link key={e._id + e.email} to={`/tweet/${e._id}`}>
-                            <div>
-                                <p>{e.content}</p>
-                            </div>
-                            </Link>
+                                <div className="loggedTweets">  
+                                    <div className="content">
+                                    <h3>{user.name}</h3>
+                                    <p>{e.content}</p>
+                                </div>
+                                <div className="tweet-actions">
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>                            </Link>
                         ))}
                     </div>
                 </div>

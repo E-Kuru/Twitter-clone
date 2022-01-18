@@ -71,10 +71,12 @@
   padding-bottom: 2%;
   background-color: rgba(0, 0, 0, 0.7);
 }
+
 /* .center .body { */
 /* margin-top: 42.6px; */
 /* height: calc(100vh - 60px); */
 /* } */
+
 .center .body .tweet {
   border-bottom: 0.5px solid #2f3336;
   height: 15%;
@@ -131,6 +133,7 @@
 }
 
 .loggedTweets {
+  margin-top: 8%;
   height: 200px;
   display: flex;
   flex-direction: column;
