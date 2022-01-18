@@ -1,12 +1,22 @@
 const User = require('../models/User')
 
-const verifyUser = async (req, res, next) => {
-  
+const verifyUser = async (req, res, next) => {  
+
     if (!req.user) {
         console.log("T'as pas le droit");
         res.status(401).json({error : "Unauthorized"})
     } else {
         next()
+    }
+}
+
+const verifySession = async (req,res,next) => {
+    const {id} = req.params
+    const SessionId = req.user
+    if(SessionId === id){
+        next()
+    } else {
+        res.status(401).json({error : "Unauthorized"})
     }
 }
 
@@ -25,5 +35,6 @@ const verifyMail = async (req,res,next) => {
 
 module.exports = {
     verifyUser,
-    verifyMail
+    verifySession,
+    verifyMail,
 }
