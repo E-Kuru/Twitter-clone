@@ -54,6 +54,11 @@
   border-right: 1px solid grey;
   position: relative;
 }
+
+.center::-webkit-scrollbar {
+  display: none;
+}
+
 .center .header {
   position: fixed;
   width: 50%;
