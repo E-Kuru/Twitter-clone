@@ -120,7 +120,7 @@ return (
                 }}
             />
             <TwitterIcon className="form-icon" style= {{color: "rgb(29, 155, 240)", fontSize: "40px"}}/>
-            <h1>Créer votre compte</h1>
+            <h1>Se connecter</h1>
             <Input 
                 type="text" 
                 placeholder="email" 
