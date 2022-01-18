@@ -14,6 +14,15 @@ const UserSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+    bio : {
+        type : String
+    },
+    location : {
+        type : String
+    },
+    webSite : {
+        type : String
+    },
     phoneNumber : {
         type : Number,
     },
@@ -32,6 +41,9 @@ const UserSchema = new mongoose.Schema({
     comments : [{
         type: mongoose.Schema.Types.ObjectId, ref: "Coment"
     }],
+    retweets : [{
+        type : mongoose.Schema.Types.ObjectId, ref : "Tweet"
+    }]
 
 },{
     timestamps : true
