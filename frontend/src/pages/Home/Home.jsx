@@ -4,15 +4,8 @@ import {UsersConnectContext} from "../../contexts/usersConnect"
 import styled from 'styled-components'
 import "./home.css"
 
-import TwitterIcon from '@mui/icons-material/Twitter';
-import HomeIcon from '@mui/icons-material/Home';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import LeftComponent from "../../components/LeftComponent";
 
 const LoadingContainer = styled.div`
     position: absolute;
@@ -63,7 +56,6 @@ const Home = () => {
     }
 
     useEffect(async () => {
-
         if(user){
             console.log(user._id);
             const getLoggedPost = await fetch (`http://localhost:5000/tweet/user/${user._id}`, {
@@ -100,56 +92,18 @@ const Home = () => {
         setTweet(e.target.value)
     }
 
-    if(!AllTweets || LoggedTweets){
+    if(user && !LoggedTweets|| !user && !AllTweets){
         return <LoadingContainer>
                 <Loading></Loading>
                 <h2>Please wait</h2>
             </LoadingContainer>
-            
     }
 
     return (
         <>
         {user ? 
             <div className="container">
-                <div className="left">
-                    <div className='element-container'>
-                        <div><TwitterIcon className= "first logo"/></div>
-                        <div className= "element">
-                            <HomeIcon className= "logo"/>
-                            <p>Home</p>
-                        </div>
-                        <div className= "element">
-                            <p className='logo'>#</p>
-                            <p>Explore</p>
-                        </div>
-                        <div className= "element">
-                            <NotificationsNoneOutlinedIcon className= "logo"/>
-                            <p>Notification</p>
-                        </div>
-                        <div className= "element">
-                            <EmailOutlinedIcon className= "logo"/>
-                            <p>Messages</p>
-                        </div>
-                        <div className= "element">
-                            <BookmarkBorderOutlinedIcon className= "logo"/>
-                            <p>Bookmarks</p>
-                        </div>
-                        <div className= "element">
-                            <ListAltOutlinedIcon className= "logo"/>
-                            <p>Lists</p>
-                        </div>
-                        <div className= "element">
-                            <PermIdentityOutlinedIcon className= "logo"/>
-                            <p>Profile</p>
-                        </div>
-                        <div className= "last element">
-                            <MoreHorizOutlinedIcon className= "logo"/>
-                            <p>More</p>
-                        </div>
-                        <button>Tweet</button>
-                    </div>
-                </div>
+                <LeftComponent/>
                 <div className="center">
                     <div className='header'>
                         <p>Home</p>
@@ -166,7 +120,7 @@ const Home = () => {
                             </div>
                         </form>
                         {LoggedTweets.map(e => (
-                            <div>
+                            <div key={e._id + e.email}>
                                 <p>{e.content}</p>
                             </div>
                         ))}
@@ -176,44 +130,7 @@ const Home = () => {
             </div> 
         : 
             <div className="container">
-                <div className="left">
-                    <div className='element-container'>
-                        <div><Link to='/'><TwitterIcon className = "first logo"/></Link></div>
-                        <div className= "element">
-                            <HomeIcon className= "logo"/>
-                            <p>Home</p>
-                        </div>
-                        <div className= "element">
-                            <p className='logo'>#</p>
-                            <p>Explore</p>
-                        </div>
-                        <div className= "element">
-                            <NotificationsNoneOutlinedIcon className= "logo"/>
-                            <p>Notification</p>
-                        </div>
-                        <div className= "element">
-                            <EmailOutlinedIcon className= "logo"/>
-                            <p>Messages</p>
-                        </div>
-                        <div className= "element">
-                            <BookmarkBorderOutlinedIcon className= "logo"/>
-                            <p>Bookmarks</p>
-                        </div>
-                        <div className= "element">
-                            <ListAltOutlinedIcon className= "logo"/>
-                            <p>Lists</p>
-                        </div>
-                        <div className= "element">
-                            <PermIdentityOutlinedIcon className= "logo"/>
-                            <p>Profile</p>
-                        </div>
-                        <div className= "last element">
-                            <MoreHorizOutlinedIcon className= "logo"/>
-                            <p>More</p>
-                        </div>
-                        <button>Tweet</button>
-                    </div>
-                </div>
+                <LeftComponent/>
                 <div className="center">
                     <div className='header'>
                         <p>Home</p>

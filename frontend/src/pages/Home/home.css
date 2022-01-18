@@ -124,4 +124,5 @@
 .right {
   flex: 1;
   background: black;
+  color: rgb(102, 101, 101);
 }
