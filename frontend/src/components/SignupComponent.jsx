@@ -21,7 +21,7 @@ const FormField = styled.form`
     width: 40%;
     /* min-height: 400px; */
     height: 85%;
-    background: rgba(0, 0, 0, 0.8);
+    // background: rgba(0, 0, 0, 0.8);
     top: 0;
     bottom: 0;
     left: 0;
@@ -58,7 +58,7 @@ const FormButton = styled.button`
     border-radius: 20px;
     border: none;
 `
-const Signup = ({setFormType}) => {
+const SignupComponent = ({setFormType}) => {
 
     const {user, setUser} = useContext(UsersConnectContext)
 
@@ -177,4 +177,4 @@ return (
 )
 }
 
-export default Signup
+export default SignupComponent

@@ -1,7 +1,7 @@
 import { useState, useEffect,useContext} from "react"
 import { Link } from "react-router-dom";
 import {UsersConnectContext} from "../../contexts/usersConnect"
-
+import styled from 'styled-components'
 import "./home.css"
 
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -13,6 +13,34 @@ import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+
+const LoadingContainer = styled.div`
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-direction : column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+`
+const Loading = styled.div`
+    width : 150px;
+    height : 150px;
+    border-radius: 50%;
+    border-top: 3px solid rgb(29, 155, 240);
+    animation: rotate 1.6s linear infinite;
+
+    @keyframes rotate {
+        0% { transform : rotate(0turn) }
+        100% { transform : rotate(1turn)}
+    }
+`
 
 const Home = () => {
 
@@ -73,7 +101,11 @@ const Home = () => {
     }
 
     if(!AllTweets || LoggedTweets){
-        return <h1>Loading</h1>
+        return <LoadingContainer>
+                <Loading></Loading>
+                <h2>Please wait</h2>
+            </LoadingContainer>
+            
     }
 
     return (

@@ -65,8 +65,8 @@ const LoginComponent = ({setFormType}) => {
 
     const formik = useFormik({
         initialValues: {
-            email: "",
-            password: "",
+            email: "kkfec@gmssssddsdail.com",
+            password: "bestt7501",
         },
 
         onSubmit: async values => {
