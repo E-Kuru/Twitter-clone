@@ -35,7 +35,6 @@ const Home = () => {
     }
 
     useEffect(async () => {
-
         if(user){
             console.log(user._id);
             const getLoggedPost = await fetch (`http://localhost:5000/tweet/user/${user._id}`, {
@@ -72,10 +71,9 @@ const Home = () => {
         setTweet(e.target.value)
     }
 
-    if(!AllTweets || LoggedTweets){
+    if(user && !LoggedTweets|| !user && !AllTweets){
         return <h1>Loading</h1>
     }
-
     return (
         <>
         {user ? 
@@ -134,7 +132,7 @@ const Home = () => {
                             </div>
                         </form>
                         {LoggedTweets.map(e => (
-                            <div>
+                            <div key={e._id + e.email}>
                                 <p>{e.content}</p>
                             </div>
                         ))}
