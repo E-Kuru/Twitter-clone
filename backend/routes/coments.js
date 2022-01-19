@@ -31,7 +31,7 @@ app.get('/:id', verifyUser, async (req, res) => {
     }
 })
 
-app.post('/', async (req, res) => {
+app.post('/',verifyUser, async (req, res) => {
 
     try {
         const coment = new Coment({
@@ -65,10 +65,15 @@ app.delete('/:id',verifyUser, async (req,res) => {
         const findComent = await Coment.findById(id).lean().exec()
         
         const findTweet = await Tweet.findOne({_id : findComent.tweet_id.valueOf()}).exec()
+        const findUser = await User.findOne({_id : findComent.user_id.valueOf()}).exec()
 
-        const comentsUpdate = findTweet.coments.filter(e => e != id)
-        findTweet.coments = comentsUpdate
+        const comentsTweetUpdate = findTweet.coments.filter(e => e != id)
+        findTweet.coments = comentsTweetUpdate
         findTweet.save()
+        
+        const comentUserUpdate = findUser.coments.filter(e => e != id)
+        findUser.coments = comentUserUpdate
+        findUser.save()
 
         const deleteTweet = await Coment.deleteOne({_id : id})
 
