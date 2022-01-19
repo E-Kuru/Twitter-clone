@@ -101,7 +101,7 @@ const Profil = () => {
     const navigate = useNavigate()
 
     useEffect ( () => {
-        console.log("user", user._id)
+        console.log("user", user.name)
     },[])
 
     const onArrowClick = () => {
@@ -129,11 +129,11 @@ const Profil = () => {
                         <EditBtn onClick={onEditClick}>Edit Profil</EditBtn>
                     </Modification>
                     <UserInformation>
-                        <h2>Karimou cisse</h2>
-                        <Paragraph style={{marginBottom: "10px", color: "grey"}}>@karimoucisse2</Paragraph>
+                        <h2>{user.name}</h2>
+                        <Paragraph style={{marginBottom: "10px", color: "grey"}}>@{user.name}2</Paragraph>
                         <Joined>
                             <DateRangeOutlinedIcon/>
-                            <Paragraph>joinded January 2022</Paragraph>
+                            <Paragraph>{user.updatedAt}</Paragraph>
                         </Joined>
                         <Follow>
                             <Paragraph><strong>6</strong>Following</Paragraph>
