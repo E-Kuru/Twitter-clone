@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const User = require("../models/User")
-const { verifyUser, verifyMail } = require("../middleware/CheckUser")
+const { verifyUser, verifySession } = require("../middleware/CheckUser")
 
 app.get('/', verifyUser, async (req,res) => {
     

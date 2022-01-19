@@ -52,7 +52,7 @@ const Home = () => {
 
         const newTweet = {
             content : Tweet,
-            user_id : user._id
+            user_id : user
         }
 
         postTweet(newTweet)
@@ -61,7 +61,6 @@ const Home = () => {
 
     useEffect(async () => {
         if(user){
-            console.log(user._id);
             const getLoggedPost = await fetch (`http://localhost:5000/tweet/user/${user._id}`, {
                 credentials: 'include',
             })
@@ -141,7 +140,6 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-                {/* <div className="right">right</div> */}
                 <RightComponent/>
             </div> 
         : 
@@ -168,7 +166,6 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-                {/* <div className="right">right</div> */}
                 <RightComponent/>
             </div> 
         } 
