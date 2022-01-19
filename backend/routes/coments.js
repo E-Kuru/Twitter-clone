@@ -75,7 +75,7 @@ app.delete('/:id',verifyUser, async (req,res) => {
         findUser.coments = comentUserUpdate
         findUser.save()
 
-        const deleteTweet = await Coment.deleteOne({_id : id})
+        const deleteComent = await Coment.deleteOne({_id : id})
 
         res.json({succes : "This coment successfully been deleted"})
 

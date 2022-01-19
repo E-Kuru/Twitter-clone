@@ -43,7 +43,7 @@ const Home = () => {
 
     const {user, setUser} = useContext(UsersConnectContext)
     const [Tweet, setTweet] = useState("")
-    const [LoggedTweets, setLoggedTweets] = useState(null)
+    // const [LoggedTweets, setLoggedTweets] = useState(null)
     const [AllTweets, setAllTweets] = useState(null)
     const handleSubmit = e => {
         e.preventDefault()
@@ -58,23 +58,13 @@ const Home = () => {
     }
 
     useEffect(async () => {
-        if(user){
-            const getLoggedPost = await fetch (`http://localhost:5000/tweet/user/${user._id}`, {
-                credentials: 'include',
-            })
-    
-            const res = await getLoggedPost.json()
-            setLoggedTweets(res)
-        }
-        else{
-            const getPost = await fetch (`http://localhost:5000/tweet`, {
-                credentials: 'include',
-            })
-    
-            const res = await getPost.json()
-            setAllTweets(res)
-        }
-    },[user])
+        const getPost = await fetch (`http://localhost:5000/tweet`, {
+            credentials: 'include',
+        })
+
+        const res = await getPost.json()
+        setAllTweets(res)
+    },[])
     
     const postTweet = async (values) => {
 
@@ -93,7 +83,7 @@ const Home = () => {
         setTweet(e.target.value)
     }
 
-    if(user && !LoggedTweets|| !user && !AllTweets){
+    if(!AllTweets){
         return <LoadingContainer>
                 <TwitterIcon 
                     style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
@@ -122,7 +112,7 @@ const Home = () => {
                                 <button type="submit">tweet</button>
                             </div>
                         </form>
-                        {LoggedTweets.map(e => (
+                        {AllTweets.map(e => (
                             <Link key={e._id + e.email} to={`/tweet/${e._id}`}>
                             <div className="loggedTweets">
                                 <div className="content">
@@ -167,7 +157,6 @@ const Home = () => {
                 <RightComponent/>
             </div> 
         } 
-            
     </>
     )
 }
