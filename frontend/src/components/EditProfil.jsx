@@ -14,30 +14,29 @@ const Shadow = styled.div`
 `
 const Container = styled.div`
     position: relative;
-    top:100px;
+    top:50px;
     left: 0;
     right:0;
     margin: auto;
     width: 50%;
-    height: 85vh;
-    padding: 5px;
+    height: 90vh;
+    padding: 15px 10px 0 10px;
     background-color: black;
     display: flex;
     flex-direction: column;
     z-index: 5;
     align-items: center;
-    overflow-y: scroll;
-    
+    border-radius: 20px;
 `
 const PhotoContainer = styled.div`
-    height: 300px;
+    height: 200px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     box-sizing: content-box;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
 `
 const UserNameBtn = styled.div`
     width: 135px;
