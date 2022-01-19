@@ -142,6 +142,11 @@ const Logo = styled.i`
        color: rgb(29, 155, 240);
    }
 `
+const NoComent = styled.h1`
+   width: 200px;
+   margin: auto;
+   margin-top: 30px;
+`
 const Home = () => {
 
     const {id} = useParams()
@@ -217,11 +222,7 @@ const Home = () => {
                                     <Logo className="far fa-heart" title= "Like"></Logo>
                                     <IosShareOutlinedIcon style= {{ fontSize: "24px", cursor: "pointer"}}/>
                                 </LogoContainer>
-                                {/* <divs">
-                                    <div></div>
-                                    <div></div>
-                                </div> */}
-                        {/* </LoggedTweets> */}
+                                {Tweet.coments.length <= 0 && <NoComent>No Coments</NoComent>}
                     </Body>
                 </Center>
                 <RightComponent/>
