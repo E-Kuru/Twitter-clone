@@ -1,3 +1,5 @@
+import {UsersConnectContext} from "../contexts/usersConnect"
+import {useContext} from 'react';
 import styled from 'styled-components'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -100,11 +102,25 @@ const SaveButton = styled.button`
         background-color: rgba(255, 255, 255, 0.8);
     }
 `
+const BirthContainer = styled.div`
+    display: flex;
+    width: 80%;
+    margin: auto;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 5px;
+`
+const BirthParagraph = styled.p`
+    color: grey;
+`
+const BirthDate = styled.h3`
+    font-size: 16px;
+`
 const EditProfil = ({setClose}) => {
-
+    const {user} = useContext(UsersConnectContext)
     const formik = useFormik({
         initialValues: {
-            name: "karimou cisse",
+            name: `${user.name}`,
             bio: "",
             location: "",
             website: ""
@@ -163,9 +179,10 @@ const EditProfil = ({setClose}) => {
                         onChange={formik.handleChange} 
                     />
                 </Form>
-                <div>
-                    <p></p>
-                </div>
+                <BirthContainer>
+                    <BirthParagraph>Birth date :</BirthParagraph>
+                    <BirthDate>{user.dateOfBirth}</BirthDate>
+                </BirthContainer>
             </Container>
         </Shadow>
     )

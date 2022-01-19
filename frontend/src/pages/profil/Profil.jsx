@@ -96,7 +96,7 @@ const Follow = styled.div`
 `
 
 const Profil = () => {
-    const {user, setUser} = useContext(UsersConnectContext)
+    const {user} = useContext(UsersConnectContext)
     const [close, setClose] = useState("false")
     const navigate = useNavigate()
 

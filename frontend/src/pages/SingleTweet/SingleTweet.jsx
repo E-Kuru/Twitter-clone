@@ -4,8 +4,9 @@ import {UsersConnectContext} from "../../contexts/usersConnect"
 import styled from 'styled-components'
 import LeftComponent from "../../components/LeftComponent";
 import RightComponent from "../../components/RightComponent";
-import TwitterIcon from '@mui/icons-material/Twitter';
 
+import TwitterIcon from '@mui/icons-material/Twitter';
+import IosShareOutlinedIcon from '@mui/icons-material/IosShareOutlined';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 
 const LoadingContainer = styled.div`
@@ -45,7 +46,102 @@ const Loading = styled.div`
         100% { transform : rotate(1turn)}
     }
 `
+const Container = styled.div`
+    display: flex;
+    height: 100vh;
+    background-color: black;
+    color: #fff;
+`
+const Center = styled.div`
+    flex: 2;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+`
+const Header = styled.div`
+    height: 45px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+const Body = styled.div`
+    padding: 15px;
+    margin-top: 25px;
+`
+// const LoggedTweets = styled.div`
 
+// `
+const TweetContainer = styled.div`
+    border-bottom: 1px solid grey;
+    padding: 15px;
+    margin-bottom: 20px;
+`
+const UserContainer = styled.div`
+    display: flex;
+    gap: 25px;
+    padding-bottom: 25px;
+`
+const UserBtn = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: blue;
+    color: #ffff;
+    font-size: 35px;
+`
+const TweetContent = styled.p`
+    font-size: 20px;
+    // margin-bottom: 20px;
+`
+const TweetCreation = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-left: 40px;
+    // margin-bottom: 20px;
+    border-bottom: 1px solid grey;
+    height: 55px;
+`
+const Paragraph = styled.p`
+    color: grey;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+`
+const Span = styled.span`
+    color : #ffff;
+    font-size: 18px;
+    font-weight: bold;
+`
+const Rating = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 40px;
+    justify-content: flex-start;
+    gap: 40px;
+    height: 55px;
+    border-bottom: 1px solid grey;
+`
+const LogoContainer = styled.div`
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    justify-content: space-around;
+    height: 55px;
+`
+const Logo = styled.i`
+   font-size: 24px;
+   cursor: pointer;
+   &:hover {
+       color: rgb(29, 155, 240);
+   }
+`
 const Home = () => {
 
     const {id} = useParams()
@@ -55,7 +151,7 @@ const Home = () => {
 
     useEffect(async () => {
         if(user){
-            console.log(id);
+            // console.log(id);
             const getPost = await fetch (`http://localhost:5000/tweet/${id}`, {
                 credentials: 'include',
             })
@@ -87,42 +183,63 @@ const Home = () => {
     return (
         <>
         {Tweet ? 
-            <div className="container">
+            <Container>
                 <LeftComponent/>
-                <div className="center">
-                    <div className='header'>
+                <Center>
+                    <Header>
                         <p>Home</p>
                         <StarBorderOutlinedIcon/>
-                    </div>
-                    <div className='body'>
-                    <div className="loggedTweets">
-                                <div className="content">
-                                <h3>{user.name}</h3>
-                                <p>{Tweet.content}</p>
-                                </div>
-                                <div className="tweet-actions">
+                    </Header>
+                    <Body>
+                        {/* <LoggedTweets> */}
+                                <TweetContainer>
+                                    <UserContainer>
+                                        <UserBtn>{user.name[0]}</UserBtn>
+                                        <div>
+                                            <h3>{user.name}</h3>
+                                            <Paragraph>@{user.name}2</Paragraph>
+                                        </div>
+                                    </UserContainer>
+                                    
+                                    <TweetContent>{Tweet.content}</TweetContent>
+                                </TweetContainer>
+                                <TweetCreation>
+                                    <Paragraph>{Tweet.createdAt}</Paragraph>
+                                    <Paragraph>@{user.name}2</Paragraph>
+                                </TweetCreation>
+                                <Rating>
+                                    <Paragraph><Span>{Tweet.retweets.length}</Span> Retweets</Paragraph>
+                                    <Paragraph><Span>{Tweet.coments.length}</Span> Coments</Paragraph>
+                                </Rating>
+                                <LogoContainer>
+                                    <Logo className="far fa-comment" title= "Reply"></Logo>
+                                    <Logo className="fas fa-retweet" title= "Retweet"></Logo>
+                                    <Logo className="far fa-heart" title= "Like"></Logo>
+                                    <IosShareOutlinedIcon style= {{ fontSize: "24px", cursor: "pointer"}}/>
+                                </LogoContainer>
+                                {/* <divs">
                                     <div></div>
                                     <div></div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
+                                </div> */}
+                        {/* </LoggedTweets> */}
+                    </Body>
+                </Center>
                 <RightComponent/>
-            </div> 
+            </Container> 
         : 
         <>
-            <div className="container">
+            <Container>
                 <LeftComponent/>
-                <div className="center">
-                    <div className='header'>
+                <Center>
+                    <Header>
                         <p>Home</p>
                         <StarBorderOutlinedIcon/>
-                    </div>
-                    <div className='body'>
-                    </div>
-                </div>
+                    </Header>
+                    <Body>
+                    </Body>
+                </Center>
                 <RightComponent/>
-            </div>         </>
+            </Container>         </>
         } 
             
     </>

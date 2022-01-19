@@ -71,7 +71,10 @@ const LeftComponent = () => {
                     />
                     </Link>
                 </div>
-                <Element className= "element">
+                <Element 
+                    className= "element"
+                    onClick={onHomeClick}
+                >
                     <HomeIcon 
                         className= "logo"
                         style={{fontSize: "30px"}}
@@ -79,7 +82,8 @@ const LeftComponent = () => {
                     <p>Home</p>
                 </Element>
                 <Element className= "element">
-                    <p className='logo'
+                    <p 
+                        className='logo'
                         style={{fontSize: "30px"}}
                     >
                         #
