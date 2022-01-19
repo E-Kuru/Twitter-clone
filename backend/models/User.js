@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
     fallowings : [{
         type: mongoose.Schema.Types.ObjectId, ref: "User"
     }],
-    comments : [{
+    coments : [{
         type: mongoose.Schema.Types.ObjectId, ref: "Coment"
     }],
     retweets : [{
