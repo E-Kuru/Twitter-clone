@@ -1,10 +1,13 @@
-import styled from 'styled-components'
-import LeftComponent from '../../components/LeftComponent'
+import {UsersConnectContext} from "../../contexts/usersConnect"
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LeftComponent from '../../components/LeftComponent'
+import RightComponent from '../../components/RightComponent';
 import EditProfil from '../../components/EditProfil';
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import styled from 'styled-components'
+
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
-import { useState } from 'react';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 const Container = styled.div`
     display: flex;
@@ -28,7 +31,7 @@ const Header = styled.div`
 `
 const ProfilBackGround = styled.div`
     width: 100%;
-    background: grey;
+    background: rgba(50, 53, 57, 0.8);
     height: 200px;
     margin-top: 45px;
 `
@@ -46,6 +49,7 @@ const UserNameBtn = styled.div`
     width: 135px;
     height: 135px;
     border-radius:50%;
+    border: 6px solid black;
     position: absolute;
     background-color: rgb(201, 116, 116);
     display: flex;
@@ -90,13 +94,15 @@ const Follow = styled.div`
     gap: 10px;
     color: gray;
 `
-const Right = styled.div`
-    flex: 1;
-    background : yellow;
-`
+
 const Profil = () => {
+    const {user, setUser} = useContext(UsersConnectContext)
     const [close, setClose] = useState("false")
     const navigate = useNavigate()
+
+    useEffect ( () => {
+        console.log("user", user.name)
+    },[])
 
     const onArrowClick = () => {
         navigate("/home")
@@ -123,11 +129,11 @@ const Profil = () => {
                         <EditBtn onClick={onEditClick}>Edit Profil</EditBtn>
                     </Modification>
                     <UserInformation>
-                        <h2>Karimou cisse</h2>
-                        <Paragraph style={{marginBottom: "10px", color: "grey"}}>@karimoucisse2</Paragraph>
+                        <h2>{user.name}</h2>
+                        <Paragraph style={{marginBottom: "10px", color: "grey"}}>@{user.name}2</Paragraph>
                         <Joined>
                             <DateRangeOutlinedIcon/>
-                            <Paragraph>joinded January 2022</Paragraph>
+                            <Paragraph>{user.updatedAt}</Paragraph>
                         </Joined>
                         <Follow>
                             <Paragraph><strong>6</strong>Following</Paragraph>
@@ -136,7 +142,7 @@ const Profil = () => {
                     </UserInformation>
                 </EditUserProfil>
             </Center>
-            <Right/>
+            <RightComponent/>
 
         </Container>
     )

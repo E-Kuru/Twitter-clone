@@ -42,11 +42,9 @@ const Loading = styled.div`
 const Home = () => {
 
     const {user, setUser} = useContext(UsersConnectContext)
-
     const [Tweet, setTweet] = useState("")
     const [LoggedTweets, setLoggedTweets] = useState(null)
     const [AllTweets, setAllTweets] = useState(null)
-
     const handleSubmit = e => {
         e.preventDefault()
 
