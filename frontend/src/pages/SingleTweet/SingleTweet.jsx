@@ -190,7 +190,7 @@ const Home = () => {
 
     const {id} = useParams()
     
-    const {user, setUser} = useContext(UsersConnectContext)
+    const {user} = useContext(UsersConnectContext)
     const [Tweet, setTweet] = useState(null)
     const [inputValue, setInputValue] = useState()
     const [comentContent, setComentContent] = useState()
@@ -208,14 +208,36 @@ const Home = () => {
         }
     },[user])
 
+    const postComent = async (value) => {
+        const response = await fetch(`http://localhost:5000/coments`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(value)
+        })
+        const data = await response.json()
+    }
+
     const onInputChange = (e) => {
         setInputValue(e.target.value)
         console.log(inputValue);
     }
+
     const onReplyClick = () => {
         setComentContent(inputValue)
         console.log(comentContent);
         setInputValue("")
+
+        const newComent = {
+            content : inputValue,
+            user_id : user._id,
+            tweet_id: Tweet._id
+        }
+        // postComent Function from above
+        postComent(newComent)
+        console.log(user._id);
     }
 
     if(!user){
