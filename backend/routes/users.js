@@ -57,10 +57,8 @@ app.put('/fallow/:User1/fallowed/:User2', async (req,res) => {
         const fallowingUser = await User.findById({_id : User1}).exec()
         fallowingUser.fallowings = [...fallowingUser.fallowings , User2]
         fallowingUser.save()
-        console.log("User1 : ",fallowingUser);
         
         const fallowedUser = await User.findById({_id : User2}).exec()
-        console.log("User fallowed : ",fallowedUser);
         fallowedUser.fallowers = [...fallowedUser.fallowings , User1]
         fallowedUser.save()
 

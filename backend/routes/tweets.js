@@ -48,6 +48,38 @@ app.get('/user/:id', verifyUser, async (req,res) => {
     }
 })
 
+// Permet de récupérer tous les tweets des users qu'on follow 
+
+app.get('/fallowings/:id', async (req,res) => {
+    
+    const {id} = req.params
+
+    try {
+        const findUser = await User.findById({_id : id})
+        const userFallowing = findUser.fallowings
+
+        let FallowedTweets = [] 
+
+        for(let i = 0 ; i < userFallowing.length ; i++){
+            const findOneUser = await User.findById({_id : userFallowing[i].valueOf()})
+            console.log('FindUser : ',findOneUser);
+
+            const tweets = await Tweet.find({user_id : findOneUser._id.valueOf()}).exec()
+            console.log('Tweets : ',tweets);
+
+            FallowedTweets = [...FallowedTweets, ...tweets]
+            console.log('I ; ' ,i);
+            console.log("Fallowed Tweets: ", FallowedTweets);
+        }
+
+        res.send(FallowedTweets).status(200)
+        
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+})
+
+
 // Post un tweet 
 
 app.post('/', verifyUser, async (req, res) => {
@@ -79,10 +111,8 @@ app.delete('/:id',verifyUser, async (req,res) => {
 
     try{
         const findTweet = await Tweet.findById(id).lean().exec()
-        console.log("User id", findTweet.user_id.valueOf());
         
         const findUser = await User.findOne({_id : findTweet.user_id.valueOf()}).exec()
-        console.log("FindUser", findUser);
 
         const tweetUpdated = findUser.tweets.filter(e => e != id)
         findUser.tweets = tweetUpdated
@@ -119,6 +149,5 @@ app.put('/retweet/:tweetId/user/:userId', async (req,res) => {
         res.status(500).json({ error: err })
     }
 })
-
 
 module.exports = app
