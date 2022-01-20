@@ -5,7 +5,7 @@ const Tweet = require("../models/Tweet")
 const User = require("../models/User")
 const { verifyUser } = require("../middleware/CheckUser")
 
-app.get('/',  async (req, res) => {
+app.get('/', verifyUser,  async (req, res) => {
     
     try{
         const coments = await Coment.find().exec()
