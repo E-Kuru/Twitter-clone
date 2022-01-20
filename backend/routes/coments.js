@@ -5,6 +5,8 @@ const Tweet = require("../models/Tweet")
 const User = require("../models/User")
 const { verifyUser } = require("../middleware/CheckUser")
 
+// Get tous les comments 
+
 app.get('/', verifyUser,  async (req, res) => {
     
     try{
@@ -16,6 +18,8 @@ app.get('/', verifyUser,  async (req, res) => {
         res.status(500).json({ error: err })
     }
 })
+
+// Get un seul coment 
 
 app.get('/:id', verifyUser, async (req, res) => {
 
@@ -31,6 +35,8 @@ app.get('/:id', verifyUser, async (req, res) => {
     }
 })
 
+// Get tous les coments d'un tweet 
+
 app.get('/tweet/:id', verifyUser, async (req,res) => {
     
     const {id} = req.params
@@ -43,6 +49,7 @@ app.get('/tweet/:id', verifyUser, async (req,res) => {
     }
 })
 
+// Post un coment 
 
 app.post('/',verifyUser, async (req, res) => {
 
@@ -69,6 +76,8 @@ app.post('/',verifyUser, async (req, res) => {
         res.status(500).json({ error: err })
     }
 })
+
+// Delete le coment d'un user 
 
 app.delete('/:id',verifyUser, async (req,res) => {
 

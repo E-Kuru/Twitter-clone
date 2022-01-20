@@ -4,6 +4,8 @@ const Tweet = require('../models/Tweet')
 const User = require('../models/User')
 const { verifyUser } = require("../middleware/CheckUser")
 
+// Get tous les tweets 
+
 app.get('/', async (req,res) => {
     
     try{
@@ -15,6 +17,8 @@ app.get('/', async (req,res) => {
         res.status(500).json({ error: err })
     }
 })
+
+// Get un seul tweet par son ID 
 
 app.get('/:id', verifyUser, async (req,res) => {
     
@@ -30,6 +34,8 @@ app.get('/:id', verifyUser, async (req,res) => {
     }
 })
 
+// Get tous les tweets d'un user 
+
 app.get('/user/:id', verifyUser, async (req,res) => {
     
     const {id} = req.params
@@ -41,6 +47,8 @@ app.get('/user/:id', verifyUser, async (req,res) => {
         res.status(500).json({ error: err })
     }
 })
+
+// Post un tweet 
 
 app.post('/', verifyUser, async (req, res) => {
 
@@ -62,6 +70,8 @@ app.post('/', verifyUser, async (req, res) => {
     }
 
 })
+
+// Supprime le tweet d'un user 
 
 app.delete('/:id',verifyUser, async (req,res) => {
 
@@ -87,6 +97,8 @@ app.delete('/:id',verifyUser, async (req,res) => {
         res.status(500).json({ error: err })
     }
 })
+
+// Permet de retweet 
 
 app.put('/retweet/:tweetId/user/:userId', async (req,res) => {
     
