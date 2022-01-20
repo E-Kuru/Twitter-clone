@@ -34,7 +34,7 @@ const Element = styled.div`
     cursor: pointer;
     width: 75%;
     padding: 7px 10px;
-    transition : all .2s ease-in-out;
+    transition : all .2s ease-in;
     &:hover {
         border-radius: 20px;
         background: rgba(102, 101, 101, 0.4);
