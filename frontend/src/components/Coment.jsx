@@ -13,44 +13,31 @@ const TweetUser = styled.div`
     max-height: 100vh;
     overflow-y: scroll;
 `
-const Coment = ({tweetId, comentContent}) => {
+const Coment = ({tweetId}) => {
     const [coments, setComents] = useState()
-    const {id} = useParams()
 
     useEffect(()  => {
         getComents()
-
-        const newComent = {
-            content : comentContent,
-            user_id : id,
-            tweet_id: tweetId
-        }
-        postComent(newComent)
-        console.log("coments", comentContent);
+        // console.log(coments);
     }, [])
+
     const getComents = async () => {
-        const response = await fetch(`http://localhost:5000/coments/${tweetId}`, {
+        const response = await fetch(`http://localhost:5000/coments`, {
             credentials: 'include',
         })
         const data = await response.json()
         setComents(data)
+        console.log("coments", coments);
     }
-    
-    const postComent = async (value) => {
-        const response = await fetch(`http://localhost:5000/coments/${tweetId}`, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-            body: JSON.stringify(value)
-        })
-        const data = await response.json()
-    }
+
     return (
         <Container>
             <TweetUser>
-
+                {coments.map((coment) => {
+                    return <div>
+                                <p>{coment.content}</p>
+                            </div>
+                })}
             </TweetUser>
         </Container>
     )
