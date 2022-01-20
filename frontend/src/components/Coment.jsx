@@ -52,14 +52,13 @@ const Container = styled.div`
 const TweetUser = styled.div`
     width: 300px;
     max-height: 100vh;
-    overflow-y: scroll;
 `
 const CommentElement = styled.div`
     display:flex;
     width: 100%;
-    border-top: 1px solid grey;
+    // border-top: 1px solid grey;
     border-bottom: 1px solid grey;
-    min-height: 40px;
+    min-height: 70px;
     align-items: center;
     padding-left: 30px;
     font-size: 25px;
@@ -67,6 +66,7 @@ const CommentElement = styled.div`
 
 const Coment = ({tweetId}) => {
     const [coments, setComents] = useState()
+    // const {id} = useParams()
 
     useEffect(()  => {
         getComents()
@@ -74,7 +74,7 @@ const Coment = ({tweetId}) => {
     }, [])
 
     const getComents = async () => {
-        const response = await fetch(`http://localhost:5000/coments`, {
+        const response = await fetch(`http://localhost:5000/coments/tweet/${tweetId}`, {
             credentials: 'include',
         })
         const data = await response.json()
@@ -89,10 +89,11 @@ const Coment = ({tweetId}) => {
                 <h2>Please wait</h2>
             </LoadingContainer>
     }
+    console.log("coments", coments);
     return (
         <Container>
             {/* <TweetUser> */}
-                {coments.map((coment) => {
+                {coments.map(coment => {
                     return <CommentElement key= {coment._id}>
                                 <p>{coment.content}</p>
                             </CommentElement>

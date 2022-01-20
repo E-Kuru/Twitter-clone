@@ -207,7 +207,7 @@ const Home = () => {
             })
             const res = await getPost.json()
             setTweet(res)
-            console.log(Tweet.coments);
+            // console.log(Tweet.coments);
             // console.log(Tweet.content);
         }
     },[user])
@@ -261,7 +261,7 @@ const Home = () => {
             <h2>Please wait</h2>
         </LoadingContainer>
     }
-    // console.log(Tweet);
+    console.log("Tweet", Tweet);
     return (
         <>
         {Tweet ? 
@@ -289,10 +289,10 @@ const Home = () => {
                             <Paragraph>{Tweet.createdAt}</Paragraph>
                             <Paragraph>@{user.name}2</Paragraph>
                         </TweetCreation>
-                        <Rating>
+                        {/* <Rating>
                             <Paragraph><Span>{Tweet.retweets.length}</Span> Retweets</Paragraph>
                             <Paragraph><Span>{Tweet.coments.length}</Span> Coments</Paragraph>
-                        </Rating>
+                        </Rating> */}
                         <LogoContainer>
                             <Logo className="far fa-comment" title= "Reply"></Logo>
                             <Logo className="fas fa-retweet" title= "Retweet"></Logo>
@@ -316,8 +316,9 @@ const Home = () => {
                                 Reply
                             </ReplyBtn>
                         </WriteComent>
-                        {Tweet.coments.length <= 0 && <NoComent>No Coments</NoComent>}
-                        <Coment tweetId = {Tweet._id} comentContent= {comentContent}/>
+                        {!Tweet.coments  && <NoComent>No Coments</NoComent> }
+                        {Tweet.coments  && <Coment tweetId = {Tweet._id} comentContent= {comentContent}/>}
+                        
                     </Body>
                 </Center>
                 <RightComponent/>
