@@ -5,7 +5,7 @@ const Tweet = require("../models/Tweet")
 const User = require("../models/User")
 const { verifyUser } = require("../middleware/CheckUser")
 
-app.get('/', verifyUser, async (req, res) => {
+app.get('/', verifyUser,  async (req, res) => {
     
     try{
         const coments = await Coment.find().exec()
@@ -30,6 +30,19 @@ app.get('/:id', verifyUser, async (req, res) => {
         res.status(500).json({ error: err })
     }
 })
+
+app.get('/tweet/:id', verifyUser, async (req,res) => {
+    
+    const {id} = req.params
+
+    try {
+        const allComents = await Coment.find({tweet_id : id}).exec()
+        res.json(allComents)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+})
+
 
 app.post('/',verifyUser, async (req, res) => {
 
