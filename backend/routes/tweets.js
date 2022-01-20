@@ -88,5 +88,28 @@ app.delete('/:id',verifyUser, async (req,res) => {
     }
 })
 
+app.put('/retweet/:tweetId/user/:userId', async (req,res) => {
+    const {tweetId, userId} = req.params
+
+    try{
+        const findTweet = await Tweet.findById({_id : tweetId})
+        console.log("Tweet retweets: ", findTweet.retweets)
+        findTweet.retweets = [...findTweet.retweets, userId]
+        findTweet.save()
+        console.log("Tweet : ", findTweet)
+        
+        const findUser = await User.findById({_id : userId})
+        console.log("User retweets : ",findUser.retweets);
+        findUser.retweets = [...findUser.retweets, tweetId]
+        findUser.save()
+        console.log("User : ",findUser);
+
+        res.json({succes : "U successfully rt this tweet, congratulation"})
+
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+})
+
 
 module.exports = app
