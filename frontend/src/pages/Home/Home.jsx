@@ -8,6 +8,7 @@ import RightComponent from "../../components/RightComponent";
 
 import TwitterIcon from '@mui/icons-material/Twitter';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import IosShareOutlinedIcon from '@mui/icons-material/IosShareOutlined';
 
 const LoadingContainer = styled.div`
     position: absolute;
@@ -38,7 +39,22 @@ const Loading = styled.div`
         100% { transform : rotate(1turn)}
     }
 `
-
+const LogoContainer = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    justify-content: space-around;
+    height: 55px;
+`
+const Logo = styled.i`
+   font-size: 24px;
+   cursor: pointer;
+   color: #ffff;
+   &:hover {
+       color: rgb(29, 155, 240);
+   }
+`
 const Home = () => {
 
     const {user, setUser} = useContext(UsersConnectContext)
@@ -120,10 +136,12 @@ const Home = () => {
                                 <h3>{user.name}</h3>
                                 <p>{e.content}</p>
                                 </div>
-                                <div className="tweet-actions">
-                                    <div></div>
-                                    <div></div>
-                                </div>
+                                <LogoContainer>
+                                    <Logo className="far fa-comment" title= "Reply"></Logo>
+                                    <Logo className="fas fa-retweet" title= "Retweet"></Logo>
+                                    <Logo className="far fa-heart" title= "Like"></Logo>
+                                    <IosShareOutlinedIcon style= {{ fontSize: "24px", cursor: "pointer", color: "#ffff"}} />
+                                </LogoContainer>
                             </div>
                             </Link>
                         ))}
@@ -146,10 +164,12 @@ const Home = () => {
                                         <h3>{user.name}</h3>
                                         <p>{element.content}</p>
                                     </div>
-                                    <div className="tweet-actions">
-                                        <div></div>
-                                        <div></div>
-                                    </div>
+                                    <LogoContainer>
+                                        <Logo className="far fa-comment" title= "Reply"></Logo>
+                                        <Logo className="fas fa-retweet" title= "Retweet"></Logo>
+                                        <Logo className="far fa-heart" title= "Like"></Logo>
+                                        <IosShareOutlinedIcon style= {{ fontSize: "24px", cursor: "pointer", color: "#ffff"}} />
+                                    </LogoContainer>
                                 </div>
                             </Link>
                         ))}

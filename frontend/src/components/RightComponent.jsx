@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 const Container = styled.div`
-    flex: 1.2;
+    flex: 1.4;
     background-color: black;
     color: rgb(102, 101, 101);
     display: flex;

@@ -13,14 +13,14 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 
 const LeftContainer = styled.div`
-    flex: 1;
+    flex: 1.3;
     background: dark;
     display: flex;
     justify-content: flex-end;
     padding-top: 10px;
 `
 const ElementContainer = styled.div`
-    width: 250px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     gap: 20px;

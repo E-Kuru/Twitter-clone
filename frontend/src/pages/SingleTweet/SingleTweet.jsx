@@ -316,8 +316,8 @@ const Home = () => {
                                 Reply
                             </ReplyBtn>
                         </WriteComent>
-                        {!Tweet.coments  && <NoComent>No Coments</NoComent> }
-                        {Tweet.coments  && <Coment tweetId = {Tweet._id} comentContent= {comentContent}/>}
+                        {Tweet.coments.length <= 0  && <NoComent>No Coments</NoComent> }
+                        {Tweet.coments.length > 0  && <Coment tweetId = {Tweet._id} comentContent= {comentContent}/>}
                         
                     </Body>
                 </Center>
