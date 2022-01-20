@@ -3,6 +3,8 @@ const app = express()
 const User = require("../models/User")
 const { verifyUser, verifySession } = require("../middleware/CheckUser")
 
+// Get tous les users 
+
 app.get('/', verifyUser, async (req,res) => {
     
     try{
@@ -15,6 +17,8 @@ app.get('/', verifyUser, async (req,res) => {
     }
 })
 
+// Get un user par son id 
+
 app.get('/:id', async (req,res) => {
     
     const {id} = req.params
@@ -26,6 +30,8 @@ app.get('/:id', async (req,res) => {
         res.status(500).json({ error: err })
     }
 })
+
+// Permet de créer un user 
 
 app.post('/newUser', async (req,res) => {
 
