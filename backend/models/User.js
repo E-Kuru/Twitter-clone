@@ -32,10 +32,10 @@ const UserSchema = new mongoose.Schema({
     tweets : [{
         type: mongoose.Schema.Types.ObjectId, ref: "Tweet"
     }],
-    fallowers : {
-        type: mongoose.Schema.Types.ObjectId, ref: "User"
-    },
     fallowings : [{
+        type: mongoose.Schema.Types.ObjectId, ref: "User"
+    }],
+    fallowers : [{
         type: mongoose.Schema.Types.ObjectId, ref: "User"
     }],
     coments : [{
