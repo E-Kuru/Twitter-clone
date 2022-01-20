@@ -57,8 +57,15 @@ const Title = styled.h2`
 `
 const MightLikeContainer = styled.div`
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    transition : all 0.2s ease;
+    &:hover {
+        background : rgba(255, 255, 255, 0.1);
+    }
 `
 const Image = styled.img`
     height: 48px;
@@ -78,6 +85,8 @@ const TrendName = styled.div`
 const FollowBtn = styled.button`
     padding: 0 15px;
     border-radius: 20px;
+    height: 33px;
+    border: none;
 `
 const Trend = styled.div`
     display: flex;
@@ -87,7 +96,7 @@ const Trend = styled.div`
     background-color: #202327;
     border-radius: 20px;
     gap: 20px;
-    padding: 15px;
+    padding: 15px 0;
 `
 const TrendHeader = styled.div`
     display: flex;
@@ -100,6 +109,11 @@ const TrendContainer = styled.div`
     flex-direction: column;
     width: 100%;
     padding-left: 20px;
+    cursor: pointer;
+    transition : all 0.2s ease;
+    &:hover {
+        background-color : rgba(255, 255, 255, 0.05);
+    }
 
 `
 const RightComponent = () => {

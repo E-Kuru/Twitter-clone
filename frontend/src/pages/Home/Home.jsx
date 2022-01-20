@@ -2,7 +2,6 @@ import { useState, useEffect,useContext} from "react"
 import { Link } from "react-router-dom";
 import {UsersConnectContext} from "../../contexts/usersConnect"
 import styled from 'styled-components'
-import "./home.css"
 import LeftComponent from "../../components/LeftComponent";
 import RightComponent from "../../components/RightComponent";
 
@@ -39,6 +38,80 @@ const Loading = styled.div`
         100% { transform : rotate(1turn)}
     }
 `
+const Container = styled.div`
+    display: flex;
+    height: 100vh;
+    background-color: black;
+    color: #fff;
+`
+const Center = styled.div`
+    overflow-y: scroll;
+    flex: 2;
+    background-color: dark;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    position: relative;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`
+const Header = styled.div`
+    display: flex;
+    padding: 8px 16px;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: solid 1px white;
+    padding-bottom: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+`
+const InputContainer = styled.div`
+    margin-top: 3%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+    padding-left: 20px;
+`
+const InputButton = styled.button`
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #ffff;
+    background-color: rgb(201, 116, 116);
+    border: none;
+`
+const Input = styled.input`
+    border: none;
+    outline: none;
+    width: 80%;
+    background-color: black;
+    font-size: 20px;
+    padding-left: 15px;
+    color: #ffff;
+`
+const SendContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 2%;
+`
+const TweetButton = styled.button`
+    background: rgb(29, 155, 240);
+    box-shadow: rgb(0 0 0 / 8%) 0px 8px 28px;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 25px;
+    border-radius: 50px;
+    color: #ffff;
+    font-size: 18px;
+    font-weight: bold;
+`
+const TweetForm = styled.form`
+    border-bottom: 0.5px solid #2f3336;
+    height: 15%;
+`
 const LogoContainer = styled.div`
     display: flex;
     width: 100%;
@@ -54,6 +127,23 @@ const Logo = styled.i`
    &:hover {
        color: rgb(29, 155, 240);
    }
+`
+const UnloggedTweets = styled.div`
+    line-height: 2;
+`
+const LoggedTweets = styled.div`
+    margin-top: 8%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    justify-content: space-between;
+    border-bottom: #2f3336 2px solid;
+`
+const LoggedContent = styled.div`
+    align-self: flex-start;
+    margin: 5% 0 0 10%;
+    color: white;
 `
 const Home = () => {
 
@@ -112,71 +202,71 @@ const Home = () => {
     return (
         <>
         {user ? 
-            <div className="container">
+            <Container>
                 <LeftComponent/>
-                <div className="center">
-                    <div className='header'>
+                <Center>
+                    <Header className='header'>
                         <p>Home</p>
                         <StarBorderOutlinedIcon/>
-                    </div>
+                    </Header>
                     <div className='body'>
-                        <form className='tweet' onSubmit={handleSubmit}>
-                            <div className='input'>
-                                <button>K</button>
-                                <input type="text" placeholder="What's happening ?" maxLength="250" onChange={handleTweetChange}/>
-                            </div>
-                            <div className="send">
-                                <button type="submit">tweet</button>
-                            </div>
-                        </form>
+                        <TweetForm className='tweet' onSubmit={handleSubmit}>
+                            <InputContainer className='input'>
+                                <InputButton>K</InputButton>
+                                <Input type="text" placeholder="What's happening ?" maxLength="250" onChange={handleTweetChange}/>
+                            </InputContainer>
+                            <SendContainer className="send">
+                                <TweetButton type="submit">tweet</TweetButton>
+                            </SendContainer>
+                        </TweetForm>
                         {AllTweets.map(e => (
                             <Link key={e._id + e.email} to={`/tweet/${e._id}`}>
-                            <div className="loggedTweets">
-                                <div className="content">
-                                <h3>{user.name}</h3>
-                                <p>{e.content}</p>
-                                </div>
+                            <LoggedTweets>
+                                <LoggedContent >
+                                    <h3>{user.name}</h3>
+                                    <p>{e.content}</p>
+                                </LoggedContent>
                                 <LogoContainer>
                                     <Logo className="far fa-comment" title= "Reply"></Logo>
                                     <Logo className="fas fa-retweet" title= "Retweet"></Logo>
                                     <Logo className="far fa-heart" title= "Like"></Logo>
                                     <IosShareOutlinedIcon style= {{ fontSize: "24px", cursor: "pointer", color: "#ffff"}} />
                                 </LogoContainer>
-                            </div>
+                            </LoggedTweets>
                             </Link>
                         ))}
                     </div>
-                </div>
+                </Center>
                 <RightComponent/>
-            </div> 
+            </Container> 
         : 
-            <div className="container">
+            <Container>
                 <LeftComponent/>
-                <div className="center">
-                    <div className='header'>
+                <Center>
+                    <Header className='header'>
                         <p>Home</p>
-                    </div>
-                    <div className="unloggedTweets">
+                    </Header>
+                    <UnloggedTweets className="unloggedTweets">
                         {AllTweets.map(element=> (
                             <Link key={element._id + element.email} to={`/tweet/${element._id}`}>
-                                <div className="loggedTweets">  
-                                    <div className="content">
+                                <LoggedTweets>  
+                                    <LoggedContent>
                                         <h3>{user.name}</h3>
                                         <p>{element.content}</p>
-                                    </div>
+                                    </LoggedContent>
                                     <LogoContainer>
                                         <Logo className="far fa-comment" title= "Reply"></Logo>
                                         <Logo className="fas fa-retweet" title= "Retweet"></Logo>
                                         <Logo className="far fa-heart" title= "Like"></Logo>
                                         <IosShareOutlinedIcon style= {{ fontSize: "24px", cursor: "pointer", color: "#ffff"}} />
                                     </LogoContainer>
-                                </div>
+                                </LoggedTweets>
                             </Link>
                         ))}
-                    </div>
-                </div>
+                    </UnloggedTweets>
+                </Center>
                 <RightComponent/>
-            </div> 
+            </Container> 
         } 
     </>
     )
