@@ -8,7 +8,7 @@ const { verifyUser } = require("../middleware/CheckUser")
 app.get('/', verifyUser, async (req, res) => {
     
     try{
-        const coments = await Coment.find.exec()
+        const coments = await Coment.find().exec()
 
         res.json(coments)
 

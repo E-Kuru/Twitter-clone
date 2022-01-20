@@ -8,9 +8,13 @@ const ComentSchema = Schema({
     },
     user_id: {
             type: Schema.Types.ObjectId, ref: "User"
+            // type: String,
+            // required: true
     },
     tweet_id: { 
         type: Schema.Types.ObjectId, ref: "Tweet" 
+        // type: String,
+        // required: true
     },
    
 }, {
