@@ -106,16 +106,12 @@ app.put('/retweet/:tweetId/user/:userId', async (req,res) => {
 
     try{
         const findTweet = await Tweet.findById({_id : tweetId})
-        console.log("Tweet retweets: ", findTweet.retweets)
         findTweet.retweets = [...findTweet.retweets, userId]
         findTweet.save()
-        console.log("Tweet : ", findTweet)
         
         const findUser = await User.findById({_id : userId})
-        console.log("User retweets : ",findUser.retweets);
         findUser.retweets = [...findUser.retweets, tweetId]
         findUser.save()
-        console.log("User : ",findUser);
 
         res.json({succes : "U successfully rt this tweet, congratulation"})
 
