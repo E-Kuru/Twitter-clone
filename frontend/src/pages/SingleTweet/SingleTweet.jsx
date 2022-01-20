@@ -57,6 +57,10 @@ const Center = styled.div`
     flex: 2;
     border-left: 1px solid gray;
     border-right: 1px solid gray;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 const Header = styled.div`
     height: 45px;
@@ -67,7 +71,7 @@ const Header = styled.div`
     justify-content: space-between;
 `
 const Body = styled.div`
-    padding: 15px;
+    // padding: 15px;
     margin-top: 25px;
 `
 // const LoggedTweets = styled.div`
@@ -203,7 +207,7 @@ const Home = () => {
             })
             const res = await getPost.json()
             setTweet(res)
-            console.log(Tweet);
+            console.log(Tweet.coments);
             // console.log(Tweet.content);
         }
     },[user])
