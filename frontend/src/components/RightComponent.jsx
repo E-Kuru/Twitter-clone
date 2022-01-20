@@ -12,6 +12,9 @@ const Container = styled.div`
     align-items: center;
     gap: 25px;
     overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 const Header = styled.div`
     display: flex;
