@@ -197,20 +197,33 @@ const Home = () => {
     const {user} = useContext(UsersConnectContext)
     const [Tweet, setTweet] = useState(null)
     const [inputValue, setInputValue] = useState()
+    const [coments, setComents] = useState()
     const [comentContent, setComentContent] = useState()
 
-    useEffect(async () => {
-        if(user){
+    useEffect(() => {
             // console.log(id);
-            const getPost = await fetch (`http://localhost:5000/tweet/${id}`, {
-                credentials: 'include',
-            })
-            const res = await getPost.json()
-            setTweet(res)
+            getUser()
+            getComents()
             // console.log(Tweet.coments);
             // console.log(Tweet.content);
-        }
     },[user])
+    const getUser = (async () => {
+        if(user){
+            const response = await fetch (`http://localhost:5000/tweet/${id}`, {
+                    credentials: 'include',
+                })
+            const res = await response.json()
+            setTweet(res)
+        }
+    })
+
+    const getComents = async () => {
+        const response = await fetch(`http://localhost:5000/coments/tweet/${Tweet._id}`, {
+            credentials: 'include',
+        })
+        const data = await response.json()
+        setComents(data)
+    }
 
     const postComent = async (value) => {
         const response = await fetch(`http://localhost:5000/coments`, {
@@ -222,17 +235,20 @@ const Home = () => {
             body: JSON.stringify(value)
         })
         const data = await response.json()
+        getComents()
+        // getUser()
+        console.log("posttttt");
+
     }
 
     const onInputChange = (e) => {
         setInputValue(e.target.value)
-        console.log(inputValue);
+        // console.log(inputValue);
     }
 
     const onReplyClick = () => {
         setComentContent(inputValue)
-        console.log(comentContent);
-        setInputValue("")
+        // console.log(comentContent);
 
         const newComent = {
             content : inputValue,
@@ -241,7 +257,8 @@ const Home = () => {
         }
         // postComent Function from above
         postComent(newComent)
-        console.log(user._id);
+        // window.location.reload(false)
+        setInputValue("")
     }
 
     if(!user){
@@ -261,7 +278,17 @@ const Home = () => {
             <h2>Please wait</h2>
         </LoadingContainer>
     }
+
+    if(!coments) {
+        return <LoadingContainer>
+                <TwitterIcon 
+                    style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
+                <Loading></Loading>
+                <h2>Please wait</h2>
+            </LoadingContainer>
+    }
     console.log("Tweet", Tweet);
+    console.log("coments", coments);
     return (
         <>
         {Tweet ? 
@@ -317,7 +344,15 @@ const Home = () => {
                             </ReplyBtn>
                         </WriteComent>
                         {Tweet.coments.length <= 0  && <NoComent>No Coments</NoComent> }
-                        {Tweet.coments.length > 0  && <Coment tweetId = {Tweet._id} comentContent= {comentContent}/>}
+                        {Tweet.coments.length > 0  && 
+                            coments.map(coment => {
+                                return <Coment 
+                                            key= {coment._id}
+                                            // tweetId = {Tweet._id} 
+                                            comentContent= {coment.content}
+                                        />
+                            })
+                        }
                         
                     </Body>
                 </Center>

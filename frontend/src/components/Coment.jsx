@@ -64,40 +64,43 @@ const CommentElement = styled.div`
     font-size: 25px;
 `
 
-const Coment = ({tweetId}) => {
-    const [coments, setComents] = useState()
+const Coment = ({tweetId, comentContent}) => {
+    // const [coments, setComents] = useState()
     // const {id} = useParams()
 
-    useEffect(()  => {
-        getComents()
-        // console.log(coments);
-    }, [])
+    // useEffect(()  => {
+    //     getComents()
+    //     // console.log(coments);
+    // }, [])
 
-    const getComents = async () => {
-        const response = await fetch(`http://localhost:5000/coments/tweet/${tweetId}`, {
-            credentials: 'include',
-        })
-        const data = await response.json()
-        setComents(data)
-    }
+    // const getComents = async () => {
+    //     const response = await fetch(`http://localhost:5000/coments/tweet/${tweetId}`, {
+    //         credentials: 'include',
+    //     })
+    //     const data = await response.json()
+    //     setComents(data)
+    // }
 
-    if(!coments) {
-        return <LoadingContainer>
-                <TwitterIcon 
-                    style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
-                <Loading></Loading>
-                <h2>Please wait</h2>
-            </LoadingContainer>
-    }
-    console.log("coments", coments);
+    // if(!coments) {
+    //     return <LoadingContainer>
+    //             <TwitterIcon 
+    //                 style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
+    //             <Loading></Loading>
+    //             <h2>Please wait</h2>
+    //         </LoadingContainer>
+    // }
+    // console.log("coments", coments);
     return (
         <Container>
+            <CommentElement>
+                <p>{comentContent}</p>
+            </CommentElement>
             {/* <TweetUser> */}
-                {coments.map(coment => {
+                {/* {coments.map(coment => {
                     return <CommentElement key= {coment._id}>
                                 <p>{coment.content}</p>
                             </CommentElement>
-                })}
+                })} */}
             {/* </TweetUser> */}
         </Container>
     )
