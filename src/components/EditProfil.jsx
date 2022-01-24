@@ -134,6 +134,7 @@ const EditProfil = ({
 }) => {
     const {user} = useContext(UsersConnectContext)
     const [nameValue, setNameValue] = useState("")
+    console.log(nameValue);
 
     const formik = useFormik({
         initialValues: {

@@ -61,6 +61,7 @@ const FormButton = styled.button`
 const SignupComponent = ({setFormType}) => {
 
     const {user, setUser} = useContext(UsersConnectContext)
+    console.log(user);
 
     const navigate = useNavigate();
 

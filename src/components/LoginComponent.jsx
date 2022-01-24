@@ -84,6 +84,7 @@ const LoginComponent = ({setFormType}) => {
             } else {
                 const userLogged = await response.json()
                 setUser(userLogged)
+                console.log(user);
                 navigate('/home')
             }
         },

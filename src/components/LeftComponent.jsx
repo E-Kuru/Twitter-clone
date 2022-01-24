@@ -57,6 +57,7 @@ const Button = styled.button`
 const LeftComponent = () => {
 
     const {user, setUser} = useContext(UsersConnectContext)
+    console.log(setUser);
 
     const navigate = useNavigate()
 

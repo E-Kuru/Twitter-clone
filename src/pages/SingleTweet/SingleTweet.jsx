@@ -196,11 +196,13 @@ const Home = () => {
     const [inputValue, setInputValue] = useState()
     const [coments, setComents] = useState()
     const [comentContent, setComentContent] = useState()
+    console.log(comentContent);
 
     useEffect(() => {
             getUser()
             getComents()
-    },[user])
+    },[getUser,getComents])
+
     const getUser = (async () => {
         if(user){
             const response = await fetch (`http://localhost:5000/tweet/${id}`, {
@@ -228,7 +230,8 @@ const Home = () => {
             credentials: 'include',
             body: JSON.stringify(value)
         })
-        // const data = await response.json()
+        const data = await response.json()
+        console.log(data);
         getComents()
     }
 

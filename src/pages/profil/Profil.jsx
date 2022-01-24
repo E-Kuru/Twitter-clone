@@ -182,7 +182,7 @@ const Profil = () => {
                         <Paragraph style={{marginBottom: "10px", color: "grey"}}>@{user.name}2</Paragraph>
                         <WebsiteContainer>
                             {bioValue && <h5>{bioValue}</h5>}
-                            {websiteValue && <Paragraph><a style={{textDecoration: "underline", color: "lightblue", cursor: "pointer"}}>{websiteValue}</a></Paragraph>}
+                            {websiteValue && <Paragraph><a href="#" style={{textDecoration: "underline", color: "lightblue", cursor: "pointer"}}>{websiteValue}</a></Paragraph>}
                         </WebsiteContainer>
                         <LocationContainer>
                             {locationValue && 

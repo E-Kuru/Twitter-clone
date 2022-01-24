@@ -186,6 +186,7 @@ const LoggedContent = styled.div`
 const Home = () => {
 
     const {user, setUser} = useContext(UsersConnectContext)
+    console.log(setUser);
     const [Tweet, setTweet] = useState("")
     const [AllTweets, setAllTweets] = useState(null)
 
@@ -225,6 +226,7 @@ const Home = () => {
             body: JSON.stringify(values)
         })
         const data = await response.json()
+        console.log(data);
         getTweets()
     }
 
