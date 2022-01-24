@@ -5,7 +5,7 @@ const { verifyUser, verifySession } = require("../middleware/CheckUser")
 
 // Get tous les users 
 
-app.get('/', verifyUser, async (req,res) => {
+app.get('/', async (req,res) => {
     
     try{
         const user = await User.find().exec()
@@ -33,7 +33,7 @@ app.get('/:id', async (req,res) => {
 
 // Permet de créer un user 
 
-app.post('/newUser', async (req,res) => {
+app.post('/newUser', verifyUser, async (req,res) => {
 
     try {
 
@@ -50,7 +50,7 @@ app.post('/newUser', async (req,res) => {
     }
 })
 
-app.put('/fallow/:User1/fallowed/:User2', async (req,res) => {
+app.put('/fallow/:User1/fallowed/:User2', verifyUser, async (req,res) => {
     
     const {User1, User2} = req.params
     try{
