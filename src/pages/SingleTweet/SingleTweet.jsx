@@ -175,9 +175,7 @@ const Home = () => {
     const [Tweet, setTweet] = useState(null)
     const [inputValue, setInputValue] = useState()
     const [coments, setComents] = useState()
-    const [comentContent, setComentContent] = useState()
-    console.log(comentContent);
-
+    
     const getUser = (async () => {
         if(user){
             const response = await fetch (`http://localhost:5000/tweet/${id}`, {
@@ -220,16 +218,13 @@ const Home = () => {
     }
 
     const onReplyClick = () => {
-        setComentContent(inputValue)
 
         const newComent = {
             content : inputValue,
             user_id : user._id,
             tweet_id: Tweet._id
         }
-        // postComent Function from above
         postComent(newComent)
-        // window.location.reload(false)
         setInputValue("")
     }
 
@@ -262,7 +257,6 @@ const Home = () => {
                         <StarBorderOutlinedIcon/>
                     </Header>
                     <Body>
-                        {/* <LoggedTweets> */}
                         <TweetContainer>
                             <UserContainer>
                                 <UserBtn>{user.name[0]}</UserBtn>
@@ -278,10 +272,6 @@ const Home = () => {
                             <Paragraph>{Tweet.createdAt}</Paragraph>
                             <Paragraph>@{user.name}2</Paragraph>
                         </TweetCreation>
-                        {/* <Rating>
-                            <Paragraph><Span>{Tweet.retweets.length}</Span> Retweets</Paragraph>
-                            <Paragraph><Span>{Tweet.coments.length}</Span> Coments</Paragraph>
-                        </Rating> */}
                         <LogoContainer>
                             <Logo className="far fa-comment" title= "Reply"></Logo>
                             <Logo className="fas fa-retweet" title= "Retweet"></Logo>

@@ -57,11 +57,11 @@ const Button = styled.button`
 const LeftComponent = () => {
 
     const {user, setUser} = useContext(UsersConnectContext)
-    console.log(setUser);
 
     const navigate = useNavigate()
 
     const onHomeClick = () => {
+        console.log(setUser);
         navigate("/home")
     }
     const onProfilClick = () => {
