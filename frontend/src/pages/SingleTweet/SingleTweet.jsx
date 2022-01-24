@@ -279,14 +279,6 @@ const Home = () => {
         </LoadingContainer>
     }
 
-    // if(!coments) {
-    //     return <LoadingContainer>
-    //             <TwitterIcon 
-    //                 style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
-    //             <Loading></Loading>
-    //             <h2>No coment</h2>
-    //         </LoadingContainer>
-    // }
     console.log("Tweet", Tweet);
     console.log("coments", coments);
     return (

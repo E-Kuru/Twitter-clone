@@ -22,19 +22,14 @@ const Center = styled.div`
     border-right: 1px solid gray;
 `
 const Header = styled.div`
-    position: fixed;
-    width: 50%;
-    height: 45px;
-    background-color: rgba(0,0,0,0.6);
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
+    padding: 8px 16px;
+    border-bottom: solid 1px white;
+    background-color: rgba(0, 0, 0, 0.7);
 `
 const ProfilBackGround = styled.div`
     width: 100%;
     background: rgba(50, 53, 57, 0.8);
     height: 200px;
-    margin-top: 45px;
 `
 const EditUserProfil = styled.div`
     width: 100%;
@@ -108,7 +103,34 @@ const Follow = styled.div`
     gap: 10px;
     color: gray;
 `
-
+const TweetsContainer = styled.div`
+    display: flex;
+    justify-content : space-between;
+    margin : 30px 0;
+    border-bottom: 2px solid grey;
+`
+const TweetTitle = styled.div`
+    width: 100%; 
+    display: flex;
+    justify-content: center;  
+    cursor: pointer;
+    padding: 15px 0; 
+    &:hover {
+        background-color: 	rgba(248,248,248,0.1);
+    }
+`
+const TweetSelect = styled.h4`
+    color: ${props => props.isSelect === "tweet" ? "rgb(29, 155, 240)": "#ffff"} ;
+`
+const  ReplieSelect = styled.h4`
+    color: ${props => props.isSelect === "replie" ? "rgb(29, 155, 240)": "#ffff"} ;
+`
+const MediaSelect = styled.h4`
+    color: ${props => props.isSelect === "media" ? "rgb(29, 155, 240)": "#ffff"} ;
+`
+const LikesSelect = styled.h4`
+    color: ${props => props.isSelect === "like" ? "rgb(29, 155, 240)": "#ffff"} ;
+`
 const Profil = () => {
     const {user} = useContext(UsersConnectContext)
     const [close, setClose] = useState("false")
@@ -116,6 +138,7 @@ const Profil = () => {
     const [bioValue, setBioValue] = useState("")
     const [locationValue, setLocationValue] = useState("")
     const [websiteValue, setWebsiteValue] = useState("")
+    const [select, setSelect] = useState("tweet")
 
     useEffect ( () => {
         console.log("user", user.name)
@@ -128,18 +151,22 @@ const Profil = () => {
     const onEditClick = () => {
         setClose("true")
     }
+    const onSelect = (string) => {
+        setSelect(string)
+    }
     return (
         <Container>
             {close === "true" && 
-            <EditProfil 
-                setClose= {setClose} 
-                bioValue={bioValue} 
-                setBioValue={setBioValue}
-                locationValue={locationValue}
-                setLocationValue={setLocationValue}
-                websiteValue={websiteValue}
-                setWebsiteValue={setWebsiteValue}
-            />}
+                <EditProfil 
+                    setClose= {setClose} 
+                    bioValue={bioValue} 
+                    setBioValue={setBioValue}
+                    locationValue={locationValue}
+                    setLocationValue={setLocationValue}
+                    websiteValue={websiteValue}
+                    setWebsiteValue={setWebsiteValue}
+                />
+            }
             <LeftComponent/>
             <Center>
                 <Header>
@@ -181,6 +208,20 @@ const Profil = () => {
                         </Follow>
                     </UserInformation>
                 </EditUserProfil>
+                <TweetsContainer>
+                    <TweetTitle onClick={() => onSelect("tweet")}>
+                        <TweetSelect isSelect = {select}>Tweets</TweetSelect>   
+                    </TweetTitle>
+                    <TweetTitle onClick={() => onSelect("replie")}>
+                        <ReplieSelect isSelect = {select}>Tweet & replies</ReplieSelect>
+                    </TweetTitle>
+                    <TweetTitle onClick={() => onSelect("media")}>
+                        <MediaSelect isSelect = {select}>Media</MediaSelect>
+                    </TweetTitle>
+                    <TweetTitle onClick={() => onSelect("like")}>
+                        <LikesSelect isSelect = {select}>Likes</LikesSelect>
+                    </TweetTitle>       
+                </TweetsContainer>
             </Center>
             <RightComponent/>
 

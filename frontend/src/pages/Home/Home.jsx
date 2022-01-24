@@ -8,6 +8,13 @@ import RightComponent from "../../components/RightComponent";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import IosShareOutlinedIcon from '@mui/icons-material/IosShareOutlined';
+import PermMediaIcon from '@mui/icons-material/PermMedia';
+import GifBoxIcon from '@mui/icons-material/GifBox';
+import PollOutlinedIcon from '@mui/icons-material/PollOutlined';
+import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined';
+import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import { GifBoxOutlined } from "@mui/icons-material";
 
 const LoadingContainer = styled.div`
     position: absolute;
@@ -93,12 +100,44 @@ const Input = styled.input`
 `
 const SendContainer = styled.div`
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding-left: 13%;
     width: 100%;
-    margin-bottom: 2%;
+    margin: 20px 0 15px 0;
+`
+const SendLogos = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+`
+const MediaIcon = styled(PermMediaIcon)`
+    cursor: pointer;
+    color:  rgb(29, 155, 240);
+    font
+`
+const GifIcon = styled(GifBoxOutlined)`
+    cursor: pointer;
+    color:  rgb(29, 155, 240);
+`
+const PollIcon = styled(PollOutlinedIcon)`
+    cursor: pointer;
+    color:  rgb(29, 155, 240);
+    transform : rotate(90deg)
+`
+const EmojiIcon = styled(SentimentSatisfiedOutlinedIcon)`
+    cursor: pointer;
+    color:  rgb(29, 155, 240);
+`
+const AgendaIcon= styled(EventAvailableOutlinedIcon)`
+    cursor: pointer;
+    color:  rgb(29, 155, 240);
+`
+const PositionIcon = styled(FmdGoodOutlinedIcon)`
+    cursor: pointer;
+    color: rgba(29, 155, 240, 0.6);
 `
 const TweetButton = styled.button`
-    background: rgb(29, 155, 240);
+    background-color: ${(props => props.tweet === "yes" ? "rgb(29, 155, 240)" : "rgba(29, 155, 240, 0.6)")} ;
     box-shadow: rgb(0 0 0 / 8%) 0px 8px 28px;
     border: none;
     padding: 10px 20px;
@@ -198,7 +237,8 @@ const Home = () => {
     if(!AllTweets){
         return <LoadingContainer>
                 <TwitterIcon 
-                    style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
+                    style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}
+                />
                 <Loading></Loading>
                 <h2>Please wait</h2>
             </LoadingContainer>
@@ -210,18 +250,26 @@ const Home = () => {
             <Container>
                 <LeftComponent/>
                 <Center>
-                    <Header className='header'>
+                    <Header>
                         <p>Home</p>
                         <StarBorderOutlinedIcon/>
                     </Header>
-                    <div className='body'>
+                    <div>
                         <TweetForm className='tweet' onSubmit={handleSubmit}>
-                            <InputContainer className='input'>
+                            <InputContainer>
                                 <InputButton>K</InputButton>
                                 <Input type="text" placeholder="What's happening ?" maxLength="250" onChange={handleTweetChange}/>
                             </InputContainer>
-                            <SendContainer className="send">
-                                <TweetButton type="submit">tweet</TweetButton>
+                            <SendContainer>
+                                <SendLogos>
+                                    <MediaIcon/>
+                                    <GifIcon/>
+                                    <PollIcon/>
+                                    <EmojiIcon/>
+                                    <AgendaIcon/>
+                                    <PositionIcon/>
+                                </SendLogos>
+                                <TweetButton type="submit" tweet = {Tweet ? "yes" : "no"}>tweet</TweetButton>
                             </SendContainer>
                         </TweetForm>
                         {AllTweets.map(e => (
@@ -248,10 +296,27 @@ const Home = () => {
             <Container>
                 <LeftComponent/>
                 <Center>
-                    <Header className='header'>
+                    <Header>
                         <p>Home</p>
                     </Header>
-                    <UnloggedTweets className="unloggedTweets">
+                    <TweetForm className='tweet' onSubmit={handleSubmit}>
+                        <InputContainer>
+                            <InputButton>K</InputButton>
+                            <Input type="text" placeholder="What's happening ?" maxLength="250" onChange={handleTweetChange}/>
+                        </InputContainer>
+                        <SendContainer>
+                            <SendLogos>
+                                <MediaIcon/>
+                                <GifIcon/>
+                                <PollIcon/>
+                                <EmojiIcon/>
+                                <AgendaIcon/>
+                                <PositionIcon/>
+                            </SendLogos>
+                            <TweetButton type="submit">tweet</TweetButton>
+                        </SendContainer>
+                    </TweetForm>
+                    <UnloggedTweets>
                         {AllTweets.map(element=> (
                             <Link key={element._id + element.email} to={`/tweet/${element._id}`}>
                                 <LoggedTweets>  
