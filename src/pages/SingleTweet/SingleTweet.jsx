@@ -198,11 +198,6 @@ const Home = () => {
     const [comentContent, setComentContent] = useState()
     console.log(comentContent);
 
-    useEffect(() => {
-            getUser()
-            getComents()
-    },[getUser,getComents])
-
     const getUser = (async () => {
         if(user){
             const response = await fetch (`http://localhost:5000/tweet/${id}`, {
@@ -220,6 +215,12 @@ const Home = () => {
         const data = await response.json()
         setComents(data)
     }
+
+    useEffect(() => {
+            getUser()
+            getComents()
+    },[getUser(),getComents()])
+
 
     const postComent = async (value) => {
         const response = await fetch(`http://localhost:5000/coments`, {
