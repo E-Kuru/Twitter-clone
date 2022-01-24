@@ -165,17 +165,21 @@ const Home = () => {
     }
 
     useEffect(async () => {
-        const getPost = await fetch (`http://localhost:5000/tweet`, {
+        getTweets() 
+    },[])
+
+    const getTweets = async () => {
+        const response = await fetch(`http://localhost:5000/tweet`, {
             credentials: 'include',
         })
 
-        const res = await getPost.json()
-        setAllTweets(res)
-    },[])
-    
+        const data = await response.json()
+        setAllTweets(data)
+    }
+
     const postTweet = async (values) => {
 
-        const response = await fetch ('http://localhost:5000/tweet', {
+        const response = await fetch('http://localhost:5000/tweet', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -183,7 +187,8 @@ const Home = () => {
             credentials: 'include',
             body: JSON.stringify(values)
         })
-        const res = await response.json()
+        const data = await response.json()
+        getTweets()
     }
 
     const handleTweetChange = e => {

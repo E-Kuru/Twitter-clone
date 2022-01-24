@@ -49,7 +49,7 @@ const MightLike = styled.div`
     background-color: #202327;
     border-radius: 20px;
     width: 80%;
-    padding: 20px 0px;
+    padding: 20px 20px;
 `
 const Title = styled.h2`
     color: #ffff;

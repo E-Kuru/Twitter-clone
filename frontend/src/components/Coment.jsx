@@ -64,22 +64,22 @@ const CommentElement = styled.div`
     font-size: 25px;
 `
 
-const Coment = ({tweetId}) => {
-    const [coments, setComents] = useState()
+const Coment = ({coments, comentContent}) => {
+    // const [coments, setComents] = useState()
     // const {id} = useParams()
 
-    useEffect(()  => {
-        getComents()
-        // console.log(coments);
-    }, [])
+    // useEffect(()  => {
+    //     getComents()
+    //     // console.log(coments);
+    // }, [])
 
-    const getComents = async () => {
-        const response = await fetch(`http://localhost:5000/coments/tweet/${tweetId}`, {
-            credentials: 'include',
-        })
-        const data = await response.json()
-        setComents(data)
-    }
+    // const getComents = async () => {
+    //     const response = await fetch(`http://localhost:5000/coments/tweet/${tweetId}`, {
+    //         credentials: 'include',
+    //     })
+    //     const data = await response.json()
+    //     setComents(data)
+    // }
 
     if(!coments) {
         return <LoadingContainer>
@@ -89,7 +89,7 @@ const Coment = ({tweetId}) => {
                 <h2>Please wait</h2>
             </LoadingContainer>
     }
-    console.log("coments", coments);
+    
     return (
         <Container>
             {/* <TweetUser> */}
