@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import {UsersConnectContext} from "../contexts/usersConnect"
 import { Link } from 'react-router-dom';
 
 import Badge from '@mui/material/Badge';
@@ -51,14 +53,24 @@ const Button = styled.button`
     font-size: 17px;
     font-weight: bold;
 `
+
 const LeftComponent = () => {
+
+    const {user, setUser} = useContext(UsersConnectContext)
+
     const navigate = useNavigate()
 
     const onHomeClick = () => {
         navigate("/home")
     }
     const onProfilClick = () => {
-        navigate('/profil')
+    
+        if(!user){
+            navigate('/gottaLogIn')
+    }
+        else {
+            navigate('/profil')
+        }
     }
     
     return (
