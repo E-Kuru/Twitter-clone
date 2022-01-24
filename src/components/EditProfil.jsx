@@ -133,7 +133,7 @@ const EditProfil = ({
     setWebsiteValue
 }) => {
     const {user} = useContext(UsersConnectContext)
-    // const [nameValue, setNameValue] = useState("")
+    const [nameValue, setNameValue] = useState("")
 
     const formik = useFormik({
         initialValues: {
