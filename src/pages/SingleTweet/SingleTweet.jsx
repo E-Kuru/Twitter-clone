@@ -219,7 +219,7 @@ const Home = () => {
     useEffect(() => {
             getUser()
             getComents()
-    },[getUser(),getComents()])
+    },[getUser,getComents])
 
 
     const postComent = async (value) => {

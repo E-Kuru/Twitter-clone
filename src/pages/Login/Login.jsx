@@ -31,7 +31,7 @@ const Login = () => {
                     S'inscrire
                 </button>
                 <h3>Vous avez déjà un compte ?</h3>
-                <p><a href="#" onClick={onLoginClick}>Se connecter</a></p>
+                <p><a href="/" onClick={onLoginClick}>Se connecter</a></p>
             </div>
             {formType === "signup" && <SignupComponent setFormType= {setFormType}/>}
             {formType === "login" && <LoginComponent setFormType= {setFormType}/>}
