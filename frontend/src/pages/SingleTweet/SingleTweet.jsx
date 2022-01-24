@@ -218,7 +218,7 @@ const Home = () => {
     })
 
     const getComents = async () => {
-        const response = await fetch(`http://localhost:5000/coments/tweet/${Tweet._id}`, {
+        const response = await fetch(`http://localhost:5000/coments/tweet/${id}`, {
             credentials: 'include',
         })
         const data = await response.json()
@@ -279,14 +279,14 @@ const Home = () => {
         </LoadingContainer>
     }
 
-    if(!coments) {
-        return <LoadingContainer>
-                <TwitterIcon 
-                    style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
-                <Loading></Loading>
-                <h2>Please wait</h2>
-            </LoadingContainer>
-    }
+    // if(!coments) {
+    //     return <LoadingContainer>
+    //             <TwitterIcon 
+    //                 style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
+    //             <Loading></Loading>
+    //             <h2>No coment</h2>
+    //         </LoadingContainer>
+    // }
     console.log("Tweet", Tweet);
     console.log("coments", coments);
     return (
@@ -342,17 +342,11 @@ const Home = () => {
                             >
                                 Reply
                             </ReplyBtn>
-                        </WriteComent>
-                        {Tweet.coments.length <= 0  && <NoComent>No Coments</NoComent> }
-                        {Tweet.coments.length > 0  && 
-                            coments.map(coment => {
-                                return <Coment 
-                                            key= {coment._id}
-                                            // tweetId = {Tweet._id} 
-                                            comentContent= {coment.content}
-                                        />
-                            })
-                        }
+                        </WriteComent>    
+
+                        <Coment 
+                            coments = {coments}
+                        />
                         
                     </Body>
                 </Center>

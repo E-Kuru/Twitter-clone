@@ -64,7 +64,7 @@ const CommentElement = styled.div`
     font-size: 25px;
 `
 
-const Coment = ({tweetId, comentContent}) => {
+const Coment = ({coments, comentContent}) => {
     // const [coments, setComents] = useState()
     // const {id} = useParams()
 
@@ -81,26 +81,23 @@ const Coment = ({tweetId, comentContent}) => {
     //     setComents(data)
     // }
 
-    // if(!coments) {
-    //     return <LoadingContainer>
-    //             <TwitterIcon 
-    //                 style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
-    //             <Loading></Loading>
-    //             <h2>Please wait</h2>
-    //         </LoadingContainer>
-    // }
-    // console.log("coments", coments);
+    if(!coments) {
+        return <LoadingContainer>
+                <TwitterIcon 
+                    style={{position: 'absolute', fontSize: "45px", color: "rgb(29, 155, 240)", top: "70px"}}/>
+                <Loading></Loading>
+                <h2>Please wait</h2>
+            </LoadingContainer>
+    }
+    
     return (
         <Container>
-            <CommentElement>
-                <p>{comentContent}</p>
-            </CommentElement>
             {/* <TweetUser> */}
-                {/* {coments.map(coment => {
+                {coments.map(coment => {
                     return <CommentElement key= {coment._id}>
                                 <p>{coment.content}</p>
                             </CommentElement>
-                })} */}
+                })}
             {/* </TweetUser> */}
         </Container>
     )
