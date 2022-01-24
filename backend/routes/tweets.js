@@ -50,7 +50,7 @@ app.get('/user/:id', verifyUser, async (req,res) => {
 
 // Permet de récupérer tous les tweets des users qu'on follow 
 
-app.get('/fallowings/:id', async (req,res) => {
+app.get('/fallowings/:id', verifyUser, async (req,res) => {
     
     const {id} = req.params
 
@@ -130,7 +130,7 @@ app.delete('/:id',verifyUser, async (req,res) => {
 
 // Permet de retweet 
 
-app.put('/retweet/:tweetId/user/:userId', async (req,res) => {
+app.put('/retweet/:tweetId/user/:userId', verifyUser, async (req,res) => {
     
     const {tweetId, userId} = req.params
 

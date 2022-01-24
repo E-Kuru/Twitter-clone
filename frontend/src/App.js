@@ -6,6 +6,7 @@ import Login from './pages/Login/Login'
 import SingleTweet from './pages/SingleTweet/SingleTweet'
 import NotFound from './pages/NotFound/NotFound'
 import Profil from './pages/profil/Profil'
+import PleaseLog from './components/PleaseLog'
 const App = () => {
   return (
     <UserConnectProvider>
@@ -15,6 +16,7 @@ const App = () => {
           <Route exact path="/" element={<Login/>}/>
           <Route exact path="/tweet/:id" element={<SingleTweet/>}/>
           <Route exact path="/profil" element={<Profil/>}/>
+          <Route exact path="/gottaLogIn" element={<PleaseLog/>}/>
           <Route exact path="*" element={<NotFound/>}/>
         </Routes>
       </BrowserRouter>
