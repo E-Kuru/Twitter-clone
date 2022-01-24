@@ -2,7 +2,6 @@ import {UsersConnectContext} from "../contexts/usersConnect"
 import {useContext, useState} from 'react';
 import styled from 'styled-components'
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
 
 import CloseIcon from '@mui/icons-material/Close';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
@@ -134,10 +133,7 @@ const EditProfil = ({
     setWebsiteValue
 }) => {
     const {user} = useContext(UsersConnectContext)
-    const [nameValue, setNameValue] = useState("")
-    // const [bioValue, setBioValue] = useState("")
-    // const [locationValue, setLocationValue] = useState("")
-    // const [websiteValue, setWebsiteValue] = useState("")
+    // const [nameValue, setNameValue] = useState("")
 
     const formik = useFormik({
         initialValues: {
@@ -151,10 +147,6 @@ const EditProfil = ({
             setBioValue(values.bio)
             setLocationValue(values.location)
             setWebsiteValue(values.website)
-            console.log(bioValue)
-            console.log(locationValue); 
-            console.log(websiteValue); 
-            // console.log("hhelloo");
         }
     })
     const onCloseCloclick = () => {

@@ -74,9 +74,6 @@ const Body = styled.div`
     // padding: 15px;
     margin-top: 25px;
 `
-// const LoggedTweets = styled.div`
-
-// `
 const TweetContainer = styled.div`
     border-bottom: 1px solid grey;
     padding: 15px;
@@ -118,21 +115,21 @@ const Paragraph = styled.p`
         text-decoration: underline;
     }
 `
-const Span = styled.span`
-    color : #ffff;
-    font-size: 18px;
-    font-weight: bold;
-`
-const Rating = styled.div`
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding-left: 40px;
-    justify-content: flex-start;
-    gap: 40px;
-    height: 55px;
-    border-bottom: 1px solid grey;
-`
+// const Span = styled.span`
+//     color : #ffff;
+//     font-size: 18px;
+//     font-weight: bold;
+// `
+// const Rating = styled.div`
+//     display: flex;
+//     align-items: center;
+//     width: 100%;
+//     padding-left: 40px;
+//     justify-content: flex-start;
+//     gap: 40px;
+//     height: 55px;
+//     border-bottom: 1px solid grey;
+// `
 const LogoContainer = styled.div`
     display: flex;
     align-items: center;
@@ -185,11 +182,11 @@ const ReplyBtn = styled.button`
    font-weight: bold;
    font-size: 16px;
 `
-const NoComent = styled.h1`
-   width: 200px;
-   margin: auto;
-   margin-top: 30px;
-`
+// const NoComent = styled.h1`
+//    width: 200px;
+//    margin: auto;
+//    margin-top: 30px;
+// `
 const Home = () => {
 
     const {id} = useParams()
@@ -201,11 +198,8 @@ const Home = () => {
     const [comentContent, setComentContent] = useState()
 
     useEffect(() => {
-            // console.log(id);
             getUser()
             getComents()
-            // console.log(Tweet.coments);
-            // console.log(Tweet.content);
     },[user])
     const getUser = (async () => {
         if(user){
@@ -234,21 +228,16 @@ const Home = () => {
             credentials: 'include',
             body: JSON.stringify(value)
         })
-        const data = await response.json()
+        // const data = await response.json()
         getComents()
-        // getUser()
-        console.log("posttttt");
-
     }
 
     const onInputChange = (e) => {
         setInputValue(e.target.value)
-        // console.log(inputValue);
     }
 
     const onReplyClick = () => {
         setComentContent(inputValue)
-        // console.log(comentContent);
 
         const newComent = {
             content : inputValue,
@@ -279,8 +268,6 @@ const Home = () => {
         </LoadingContainer>
     }
 
-    console.log("Tweet", Tweet);
-    console.log("coments", coments);
     return (
         <>
         {Tweet ? 

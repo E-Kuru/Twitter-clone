@@ -1,5 +1,5 @@
 import {UsersConnectContext} from "../../contexts/usersConnect"
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LeftComponent from '../../components/LeftComponent'
 import RightComponent from '../../components/RightComponent';
@@ -139,10 +139,6 @@ const Profil = () => {
     const [locationValue, setLocationValue] = useState("")
     const [websiteValue, setWebsiteValue] = useState("")
     const [select, setSelect] = useState("tweet")
-
-    useEffect ( () => {
-        console.log("user", user.name)
-    },[])
 
     const onArrowClick = () => {
         navigate("/home")

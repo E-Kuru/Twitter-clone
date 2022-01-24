@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { useParams } from 'react-router-dom'
 
 const LoadingContainer = styled.div`
     position: absolute;
@@ -49,10 +47,6 @@ const Container = styled.div`
     gap: 20px;
     align-items: center;
 `
-const TweetUser = styled.div`
-    width: 300px;
-    max-height: 100vh;
-`
 const CommentElement = styled.div`
     display:flex;
     width: 100%;
@@ -65,21 +59,6 @@ const CommentElement = styled.div`
 `
 
 const Coment = ({coments, comentContent}) => {
-    // const [coments, setComents] = useState()
-    // const {id} = useParams()
-
-    // useEffect(()  => {
-    //     getComents()
-    //     // console.log(coments);
-    // }, [])
-
-    // const getComents = async () => {
-    //     const response = await fetch(`http://localhost:5000/coments/tweet/${tweetId}`, {
-    //         credentials: 'include',
-    //     })
-    //     const data = await response.json()
-    //     setComents(data)
-    // }
 
     if(!coments) {
         return <LoadingContainer>
@@ -92,13 +71,11 @@ const Coment = ({coments, comentContent}) => {
     
     return (
         <Container>
-            {/* <TweetUser> */}
                 {coments.map(coment => {
                     return <CommentElement key= {coment._id}>
                                 <p>{coment.content}</p>
                             </CommentElement>
                 })}
-            {/* </TweetUser> */}
         </Container>
     )
 }

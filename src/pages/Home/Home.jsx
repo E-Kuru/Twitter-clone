@@ -9,7 +9,6 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import IosShareOutlinedIcon from '@mui/icons-material/IosShareOutlined';
 import PermMediaIcon from '@mui/icons-material/PermMedia';
-import GifBoxIcon from '@mui/icons-material/GifBox';
 import PollOutlinedIcon from '@mui/icons-material/PollOutlined';
 import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
@@ -202,7 +201,7 @@ const Home = () => {
         setTweet("")
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         getTweets() 
     },[])
 
